@@ -1,0 +1,357 @@
+[gd_scene load_steps=19 format=4 uid="uid://cbgqmgcvs8lj7"]
+
+[ext_resource type="Script" path="res://Game/Levels/Blacksmith/blacksmith.gd" id="1_vhvm4"]
+[ext_resource type="Texture2D" uid="uid://dpkhlo5rp0rrk" path="res://BGs/Forest/background_0.png" id="2_nuty1"]
+[ext_resource type="Texture2D" uid="uid://mpl7t4ntarut" path="res://BGs/Forest/background_1.png" id="3_yn70p"]
+[ext_resource type="Texture2D" uid="uid://dqppjbahj8n6f" path="res://BGs/Forest/background_2.png" id="4_wtyng"]
+[ext_resource type="Texture2D" uid="uid://bqv340oq4h0gv" path="res://BGs/Forest/tileset.png" id="5_vx8bl"]
+[ext_resource type="Texture2D" uid="uid://ckg0ktq0cm1uy" path="res://Game/Levels/Blacksmith/flag_stand.aseprite" id="6_8teca"]
+[ext_resource type="Texture2D" uid="uid://cbpdfeci74qvw" path="res://Game/Levels/Blacksmith/wall.aseprite" id="7_c6re2"]
+[ext_resource type="Texture2D" uid="uid://v4inbd020u62" path="res://Game/Levels/Shop/fence_1.png" id="8_meq5e"]
+[ext_resource type="Texture2D" uid="uid://cf0o0xuo8v2gq" path="res://Game/Levels/Shop/fence_2.png" id="9_cq2lb"]
+[ext_resource type="Texture2D" uid="uid://b7515msod3xde" path="res://Game/Levels/Blacksmith/stump.png" id="10_bphdo"]
+[ext_resource type="Texture2D" uid="uid://ddbw5i4mjer6p" path="res://Game/Levels/Blacksmith/anvil.aseprite" id="11_e77rv"]
+[ext_resource type="Texture2D" uid="uid://cs08bxeyt5d8a" path="res://Game/Levels/Shop/sign.png" id="11_n4om1"]
+[ext_resource type="PackedScene" uid="uid://b7lc76b1hti0x" path="res://Game/Levels/Shop/ShopCat/ShopCat.tscn" id="12_c247q"]
+[ext_resource type="Texture2D" uid="uid://wee70hxgwwag" path="res://Game/Levels/Blacksmith/flag.aseprite" id="13_ulqig"]
+[ext_resource type="Texture2D" uid="uid://cprbj7n0rww8q" path="res://Game/Levels/Shop/lamp.png" id="14_fud4r"]
+[ext_resource type="PackedScene" uid="uid://d1rk1hmn21dih" path="res://flicker.tscn" id="15_f511r"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_64w6s"]
+texture = ExtResource("5_vx8bl")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+13:0/0 = 0
+14:0/0 = 0
+15:0/0 = 0
+12:1/0 = 0
+13:1/0 = 0
+14:1/0 = 0
+15:1/0 = 0
+16:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+11:2/0 = 0
+12:2/0 = 0
+13:2/0 = 0
+14:2/0 = 0
+15:2/0 = 0
+16:2/0 = 0
+17:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+11:3/0 = 0
+12:3/0 = 0
+13:3/0 = 0
+14:3/0 = 0
+15:3/0 = 0
+16:3/0 = 0
+17:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+9:4/0 = 0
+11:4/0 = 0
+12:4/0 = 0
+13:4/0 = 0
+14:4/0 = 0
+15:4/0 = 0
+16:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+9:5/0 = 0
+12:5/0 = 0
+13:5/0 = 0
+14:5/0 = 0
+15:5/0 = 0
+16:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+8:6/0 = 0
+9:6/0 = 0
+12:6/0 = 0
+13:6/0 = 0
+14:6/0 = 0
+15:6/0 = 0
+16:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+6:7/0 = 0
+7:7/0 = 0
+9:7/0 = 0
+13:7/0 = 0
+14:7/0 = 0
+15:7/0 = 0
+0:8/0 = 0
+1:8/0 = 0
+2:8/0 = 0
+3:8/0 = 0
+4:8/0 = 0
+5:8/0 = 0
+6:8/0 = 0
+7:8/0 = 0
+8:8/0 = 0
+9:8/0 = 0
+10:8/0 = 0
+11:8/0 = 0
+12:8/0 = 0
+13:8/0 = 0
+14:8/0 = 0
+15:8/0 = 0
+16:8/0 = 0
+17:8/0 = 0
+0:9/0 = 0
+1:9/0 = 0
+2:9/0 = 0
+3:9/0 = 0
+4:9/0 = 0
+5:9/0 = 0
+6:9/0 = 0
+7:9/0 = 0
+8:9/0 = 0
+9:9/0 = 0
+10:9/0 = 0
+11:9/0 = 0
+12:9/0 = 0
+13:9/0 = 0
+14:9/0 = 0
+15:9/0 = 0
+16:9/0 = 0
+17:9/0 = 0
+0:10/0 = 0
+1:10/0 = 0
+2:10/0 = 0
+3:10/0 = 0
+4:10/0 = 0
+5:10/0 = 0
+6:10/0 = 0
+7:10/0 = 0
+8:10/0 = 0
+9:10/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_akovj"]
+sources/0 = SubResource("TileSetAtlasSource_64w6s")
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_vhvm4")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.684309, 0.692175, 0.858158, 1)
+
+[node name="BG" type="Node2D" parent="."]
+z_index = -10
+position = Vector2(0, -2)
+
+[node name="Parallax2D" type="Parallax2D" parent="BG"]
+modulate = Color(0.493545, 0.493546, 0.493546, 1)
+scroll_scale = Vector2(0.5, 1)
+repeat_size = Vector2(288, 0)
+repeat_times = 5
+
+[node name="Background0" type="Sprite2D" parent="BG/Parallax2D"]
+texture_filter = 1
+texture = ExtResource("2_nuty1")
+
+[node name="Parallax2D2" type="Parallax2D" parent="BG"]
+modulate = Color(0.493545, 0.493546, 0.493546, 1)
+scroll_scale = Vector2(0.6, 1)
+repeat_size = Vector2(288, 0)
+repeat_times = 5
+
+[node name="Background1" type="Sprite2D" parent="BG/Parallax2D2"]
+texture_filter = 1
+position = Vector2(0, -9)
+texture = ExtResource("3_yn70p")
+
+[node name="Parallax2D3" type="Parallax2D" parent="BG"]
+modulate = Color(0.493545, 0.493546, 0.493546, 1)
+scroll_scale = Vector2(0.7, 1)
+repeat_size = Vector2(288, 0)
+repeat_times = 5
+
+[node name="Background2" type="Sprite2D" parent="BG/Parallax2D3"]
+texture_filter = 1
+position = Vector2(0, -31)
+texture = ExtResource("4_wtyng")
+
+[node name="Parallax2D5" type="Parallax2D" parent="BG"]
+modulate = Color(0, 0, 0, 1)
+scroll_scale = Vector2(0.8, 1)
+repeat_size = Vector2(288, 0)
+repeat_times = 5
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="BG/Parallax2D5"]
+texture_filter = 1
+position = Vector2(0, 10)
+tile_map_data = PackedByteArray("AAD5//v/AAAAAAIAAAD5//z/AAAAAAMAAAAIAPv/AAAAAAIAAAAIAPz/AAAAAAMAAAD3//v/AAACAAIAAAD3//z/AAACAAMAAAD3//3/AAACAAQAAAAFAPv/AAACAAIAAAAFAPz/AAACAAMAAAAFAP3/AAACAAQAAAD4//v/AAABAAIAAAAHAPv/AAABAAIAAAAGAPv/AAABAAIAAAD6//v/AAABAAMAAAD7//v/AAAEAAYAACD8//v/AAABAAMAAAD9//v/AAABAAIAAAADAPv/AAAEAAYAACACAPv/AAABAAMAAAABAPv/AAAEAAYAACAAAPv/AAAEAAYAACAEAPv/AAABAAIAAAD///v/AAAEAAYAACD+//v/AAAEAAYAACABAAEAAAAEAAgAAAACAAEAAAAFAAgAAAADAAAAAAAGAAcAAAADAAEAAAAGAAgAAAAEAAAAAAAHAAcAAAAEAAEAAAAHAAgAAAAFAAEAAAAIAAgAAAD6/wEAAAAJAAYAAAD7/wEAAAAFAAgAAAD8/wAAAAAGAAcAAAD8/wEAAAAGAAgAAAD9/wAAAAAHAAcAAAD9/wEAAAAHAAgAAAD+/wEAAAAIAAgAAAD4/wAAAAAHAAUAAAD4/wEAAAAHAAYAAAD5/wAAAAAIAAUAAAD5/wEAAAAIAAYAAAD6/wAAAAAJAAUAAAD1/wAAAAAHAAUAAAD1/wEAAAAHAAYAAAD2/wAAAAAIAAUAAAD2/wEAAAAIAAYAAAD3/wAAAAAJAAUAAAD3/wEAAAAJAAYAAAD3//r/AAAAAAkAAAD4//r/AAAAAAkAAAD5//r/AAAAAAkAAAD6//r/AAAAAAkAAAD7//r/AAAAAAkAAAD8//r/AAAAAAkAAAD9//r/AAAAAAkAAAD+//r/AAAAAAkAAAD///r/AAAAAAkAAAAAAPr/AAAAAAkAAAABAPr/AAAAAAkAAAACAPr/AAAAAAkAAAADAPr/AAAAAAkAAAAEAPr/AAAAAAkAAAAFAPr/AAAAAAkAAAAGAPr/AAAAAAkAAAAHAPr/AAAAAAkAAAAHAPn/AAAAAAkAAAAGAPn/AAAAAAkAAAAFAPn/AAAAAAkAAAAEAPn/AAAAAAkAAAADAPn/AAAAAAkAAAACAPn/AAAAAAkAAAABAPn/AAAAAAkAAAAAAPn/AAAAAAkAAAD///n/AAAAAAkAAAD+//n/AAAAAAkAAAD9//n/AAAAAAkAAAD8//n/AAAAAAkAAAD7//n/AAAAAAkAAAD6//n/AAAAAAkAAAD5//n/AAAAAAkAAAD4//n/AAAAAAkAAAD3//n/AAAAAAkAAAD2//n/AAAAAAkAAAD1//n/AAAAAAkAAAD0//n/AAAAAAkAAADz//n/AAAAAAkAAADz//r/AAAAAAkAAAD0//r/AAAAAAkAAAD1//r/AAAAAAkAAAD2//r/AAAAAAkAAAAIAPr/AAAAAAkAAAAJAPr/AAAAAAkAAAAKAPr/AAAAAAkAAAALAPr/AAAAAAkAAAAMAPr/AAAAAAkAAAAMAPn/AAAAAAkAAAALAPn/AAAAAAkAAAAKAPn/AAAAAAkAAAAJAPn/AAAAAAkAAAAIAPn/AAAAAAkAAADy//r/AAAAAAkAAADx//r/AAAAAAkAAADx//n/AAAAAAkAAADy//n/AAAAAAkAAAA=")
+tile_set = SubResource("TileSet_akovj")
+
+[node name="Parallax2D7" type="Parallax2D" parent="BG"]
+scroll_scale = Vector2(0.9, 1)
+repeat_size = Vector2(288, 0)
+repeat_times = 5
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="BG/Parallax2D7"]
+modulate = Color(0.485703, 0.485704, 0.485703, 1)
+texture_filter = 1
+position = Vector2(0, 10)
+tile_map_data = PackedByteArray("AAAEAAAAAAAIAAUAAAD5/wAAAAAGAAcAAAD5//z/AAAAAAMAAAAIAPz/AAAAAAMAAAD3//z/AAACAAMAAAD3//3/AAACAAQAAAAFAPz/AAACAAMAAAAFAP3/AAACAAQAAAAHAAAAAAAIAAUAAAAIAAAAAAAJAAUAAAD8/wAAAAADAAMAAAD9/wAAAAAEAAMAAAD3/wEAAAAEAAQAAAD4/wEAAAAGAAgAAAD5/wEAAAAGAAgAAAD6/wEAAAAHAAgAAAD7/wEAAAAEAAUAAAD8/wEAAAADAAQAAAD9/wEAAAAEAAQAAAD+/wEAAAAFAAYAAAD//wEAAAAKAAgAAAAAAAEAAAAKAAgAAAABAAEAAAAGAAYAAAACAAEAAAADAAQAAAADAAEAAAAGAAUAAAAEAAEAAAAIAAYAAAAFAAEAAAAIAAYAAAAGAAEAAAAIAAYAAAAHAAEAAAAIAAYAAAAIAAEAAAAJAAYAAAADAAAAAAAEAAMAAAAFAAAAAAAIAAUAAAAGAAAAAAAIAAUAAAD6/wAAAAAHAAcAAAD7/wAAAAAHAAcAAAD4/wAAAAAGAAcAAAD3/wAAAAAEAAMAAAACAAAAAAADAAMAAAADAAIAAAAKAAkAAAAEAAIAAAALAAkAAAAFAAIAAAAMAAkAAAAGAAIAAAANAAkAAAAHAAIAAAAOAAkAAAAIAAIAAAAPAAkAAAD7/wIAAAAKAAkAAAD8/wIAAAALAAkAAAD9/wIAAAAMAAkAAAD+/wIAAAANAAkAAAD//wIAAAAOAAkAAAAAAAIAAAAPAAkAAAABAAIAAAAQAAkAAAACAAIAAAARAAkAAAD3/wIAAAAOAAkAAAD4/wIAAAAPAAkAAAD5/wIAAAAQAAkAAAD6/wIAAAARAAkAAAA=")
+tile_set = SubResource("TileSet_akovj")
+
+[node name="Blackout" type="ColorRect" parent="BG"]
+offset_left = 141.0
+offset_top = 126.0
+offset_right = 181.0
+offset_bottom = 166.0
+scale = Vector2(22.7045, -9.97733)
+color = Color(0, 0, 0, 1)
+
+[node name="Blackout2" type="ColorRect" parent="BG"]
+offset_left = -1056.0
+offset_top = 126.0
+offset_right = -1016.0
+offset_bottom = 166.0
+scale = Vector2(22.7045, -9.97733)
+color = Color(0, 0, 0, 1)
+
+[node name="Blackout3" type="ColorRect" parent="BG"]
+offset_left = -577.0
+offset_top = -72.0
+offset_right = -537.0
+offset_bottom = -32.0
+scale = Vector2(22.7045, -9.97733)
+color = Color(0, 0, 0, 1)
+
+[node name="Decor" type="Node2D" parent="."]
+
+[node name="FlagStand" type="Sprite2D" parent="Decor"]
+texture_filter = 1
+position = Vector2(-18, 9)
+texture = ExtResource("6_8teca")
+
+[node name="Flag" type="Sprite2D" parent="Decor"]
+texture_filter = 1
+position = Vector2(-17, 9)
+texture = ExtResource("13_ulqig")
+
+[node name="Wall" type="Sprite2D" parent="Decor"]
+modulate = Color(0.288518, 0.288518, 0.288518, 1)
+texture_filter = 1
+position = Vector2(17, 27)
+texture = ExtResource("7_c6re2")
+
+[node name="Fence1" type="Sprite2D" parent="Decor"]
+texture_filter = 1
+position = Vector2(105.75, 33)
+scale = Vector2(0.609589, 1)
+texture = ExtResource("8_meq5e")
+
+[node name="Fence2" type="Sprite2D" parent="Decor"]
+texture_filter = 1
+position = Vector2(-111, 33)
+texture = ExtResource("9_cq2lb")
+
+[node name="Sign" type="Sprite2D" parent="Decor"]
+texture_filter = 1
+position = Vector2(-69, 27)
+texture = ExtResource("11_n4om1")
+
+[node name="Stump" type="Sprite2D" parent="Decor"]
+modulate = Color(0.666569, 0.666569, 0.666569, 1)
+texture_filter = 1
+position = Vector2(53, 36)
+texture = ExtResource("10_bphdo")
+
+[node name="Anvil" type="Sprite2D" parent="Decor"]
+modulate = Color(0.666569, 0.666569, 0.666569, 1)
+texture_filter = 1
+position = Vector2(22, 35)
+texture = ExtResource("11_e77rv")
+
+[node name="Lamp" type="Sprite2D" parent="Decor"]
+texture_filter = 1
+position = Vector2(56, 14)
+texture = ExtResource("14_fud4r")
+
+[node name="Flicker" parent="Decor" instance=ExtResource("15_f511r")]
+position = Vector2(50, 8)
+energy = 6.12996
+texture_scale = 1.26
+min_energy = 3.5
+
+[node name="ShopCat" parent="." instance=ExtResource("12_c247q")]
+position = Vector2(-135, 41)
+
+[node name="FG" type="Node2D" parent="."]
+
+[node name="Parallax2D6" type="Parallax2D" parent="FG"]
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="FG/Parallax2D6"]
+modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+position = Vector2(0, 10)
+tile_map_data = PackedByteArray("AAAHAPv/AAAOAAIAAAAHAPz/AAAOAAMAAAAHAP3/AAAOAAQAAAAHAAEAAAAOAAgAAAAMAAEAAAARAAgAAAANAAEAAAARAAgAAAD0//v/AAALAAIAAAD0//z/AAALAAMAAAD0//3/AAALAAQAAAD0/wEAAAALAAgAAAD1//r/AAAMAAEAAAD1//v/AAAMAAIAAAD1//z/AAAMAAMAAAD1//3/AAAMAAQAAAD1//7/AAAMAAUAAAD1////AAAMAAYAAAD1/wEAAAAMAAgAAAD2//n/AAANAAAAAAD2//r/AAANAAEAAAD2//v/AAANAAIAAAD2//z/AAANAAMAAAD2//3/AAANAAQAAAD2//7/AAANAAUAAAD2////AAANAAYAAAD2/wAAAAANAAcAAAD2/wEAAAANAAgAAAD3//n/AAAOAAAAAAD3//r/AAAOAAEAAAD3//v/AAAOAAIAAAD3//z/AAAOAAMAAAD3//3/AAAOAAQAAAD3//7/AAAOAAUAAAD3////AAAOAAYAAAD3/wAAAAAOAAcAAAD3/wEAAAAOAAgAAAD4//n/AAAPAAAAAAD4//r/AAAPAAEAAAD4//v/AAAPAAIAAAD4//z/AAAPAAMAAAD4//3/AAAPAAQAAAD4//7/AAAPAAUAAAD4////AAAPAAYAAAD4/wAAAAAPAAcAAAD4/wEAAAAPAAgAAAD5//r/AAAQAAEAAAD5//v/AAAQAAIAAAD5//z/AAAQAAMAAAD5//3/AAAQAAQAAAD5//7/AAAQAAUAAAD5////AAAQAAYAAAD5/wEAAAAQAAgAAAD6//v/AAARAAIAAAD6//z/AAARAAMAAAD6/wEAAAARAAgAAAAGAPv/AAANAAIAAAAGAPz/AAANAAMAAAAGAP3/AAANAAQAAAAGAAEAAAANAAgAAAAHAPr/AAAOAAEAAAAHAP7/AAAOAAUAAAAHAP//AAAOAAYAAAAFAPv/AAAMAAIAAAAFAPz/AAAMAAMAAAAFAP3/AAAMAAQAAAAFAAEAAAAMAAgAAAAGAPr/AAANAAEAAAAGAP7/AAANAAUAAAAGAP//AAANAAYAAAAHAPn/AAAOAAAAAAAHAAAAAAAOAAcAAAAEAPv/AAALAAIAAAAEAPz/AAALAAMAAAAEAP3/AAALAAQAAAAEAAEAAAALAAgAAAAFAPr/AAAMAAEAAAAFAP7/AAAMAAUAAAAFAP//AAAMAAYAAAAGAPn/AAANAAAAAAAGAAAAAAANAAcAAAA=")
+tile_set = SubResource("TileSet_akovj")
+
+[node name="Parallax2D4" type="Parallax2D" parent="FG"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="FG/Parallax2D4"]
+modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+position = Vector2(0, 10)
+tile_map_data = PackedByteArray("AAD2/wIAAAAAAAkAAAD3/wIAAAAMAAkAAAD4/wIAAAANAAkAAAD5/wIAAAAOAAkAAAD6/wIAAAAPAAkAAAD7/wIAAAAPAAkAABD8/wIAAAAOAAkAABD9/wIAAAANAAkAABD+/wIAAAAQAAkAABD//wIAAAAPAAkAABAAAAIAAAAOAAkAABABAAIAAAANAAkAABACAAIAAAAMAAkAABADAAIAAAALAAkAABAEAAIAAAANAAkAAAAFAAIAAAAOAAkAAAAGAAIAAAAPAAkAAAAHAAIAAAAQAAkAAAAHAAQAAAAAAAkAAAAGAAQAAAAAAAkAAAAFAAQAAAAAAAkAAAAEAAQAAAAAAAkAAAADAAQAAAAAAAkAAAACAAQAAAAAAAkAAAABAAQAAAAAAAkAAAAAAAQAAAAAAAkAAAD//wQAAAAAAAkAAAD+/wQAAAAAAAkAAAD9/wQAAAAAAAkAAAD8/wQAAAAAAAkAAAD7/wQAAAAAAAkAAAD6/wQAAAAAAAkAAAD5/wQAAAAAAAkAAAD4/wQAAAAAAAkAAAD3/wQAAAAAAAkAAAD2/wQAAAAAAAkAAAD2/wMAAAAAAAkAAAD3/wMAAAAAAAkAAAD4/wMAAAAAAAkAAAD5/wMAAAAAAAkAAAD6/wMAAAAAAAkAAAD7/wMAAAAAAAkAAAD8/wMAAAAAAAkAAAD9/wMAAAAAAAkAAAD+/wMAAAAAAAkAAAD//wMAAAAAAAkAAAAAAAMAAAAAAAkAAAABAAMAAAAAAAkAAAACAAMAAAAAAAkAAAADAAMAAAAAAAkAAAAEAAMAAAAAAAkAAAAFAAMAAAAAAAkAAAAGAAMAAAAAAAkAAAAHAAMAAAAAAAkAAAD8//n/AAAAAAkAAAD9//n/AAAAAAkAAAAIAPn/AAAAAAkAAAAHAPn/AAAAAAkAAAAGAPn/AAAAAAkAAAAFAPn/AAAAAAkAAAAEAPn/AAAAAAkAAAADAPn/AAAAAAkAAAACAPn/AAAAAAkAAAABAPn/AAAAAAkAAAAAAPn/AAAAAAkAAAD///n/AAAAAAkAAAD+//n/AAAAAAkAAAD7//n/AAAAAAkAAAD6//n/AAAAAAkAAAD5//n/AAAAAAkAAAD4//n/AAAAAAkAAAD3//n/AAAAAAkAAAD2//n/AAAAAAkAAAD3/wEAAAACAAgAAAD4/wEAAAADAAgAAAD5/wEAAAAJAAgAAAD6/wEAAAAJAAcAAAD7/wEAAAAAAAgAAAD8/wEAAAADAAgAAAD9/wEAAAAAAAgAAAD+/wEAAAAAAAQAAAD//wEAAAADAAgAAAAAAAEAAAAAAAgAAAABAAEAAAADAAgAAAACAAEAAAAAAAgAAAADAAEAAAAKAAgAAAAEAAEAAAAEAAYAAAAFAAEAAAAFAAYAAAAIAAEAAAAAAAkAAAD2/wEAAAAAAAkAAAD2//7/AAAAAAkAAAD2////AAAAAAkAAAD2/wAAAAAAAAkAAAD3//7/AAAAAAkAAAD3////AAAAAAkAAAD3/wAAAAACAAcAAAD4//7/AAADAAUAAAD4////AAADAAYAAAD4/wAAAAADAAcAAAAIAAAAAAAAAAkAAAAFAAAAAAADAAcAABAGAAEAAAAFAAYAAAAHAAEAAAAFAAYAAAAIAAQAAAAAAAkAAAAIAAMAAAAAAAkAAAAIAAIAAAAAAAkAAAAIAP//AAAAAAkAAAAIAP7/AAAAAAkAAAAIAP3/AAAAAAkAAAAIAPz/AAAAAAkAAAAIAPv/AAAAAAkAAAAIAPr/AAAAAAkAAAD2//3/AAAAAAkAAAD2//z/AAAAAAkAAAD2//v/AAAAAAkAAAD2//r/AAAAAAkAAAD2//j/AAAAAAkAAAD3//r/AAAAAAkAAAD3//v/AAAAAAkAAAD3//z/AAAAAAkAAAD3//3/AAAAAAkAAAA=")
+tile_set = SubResource("TileSet_akovj")
+
+[node name="Items" type="HBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 4.0
+offset_right = 66.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="CatExit" type="Marker2D" parent="."]
+position = Vector2(124, 40)
+
+[node name="Anvil" type="Marker2D" parent="."]
+position = Vector2(23, 23)
+
+[node name="CatEnter" type="Marker2D" parent="."]
+position = Vector2(0, 40)

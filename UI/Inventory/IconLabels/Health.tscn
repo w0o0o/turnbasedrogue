@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://byyhmdw27tepq"]
+
+[ext_resource type="Script" path="res://UI/Inventory/IconLabels/mana_label.gd" id="1_k4vtv"]
+[ext_resource type="Texture2D" uid="uid://camxr00spul6c" path="res://UI/heart.png" id="2_f6j04"]
+
+[node name="HealthLabel" type="Node2D"]
+script = ExtResource("1_k4vtv")
+show = true
+mana_count = 3
+cols = 3
+reversed = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-6, 0)
+texture = ExtResource("2_f6j04")

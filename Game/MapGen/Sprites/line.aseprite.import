@@ -1,0 +1,16 @@
+[remap]
+
+importer="aseprite_wizard.plugin.static-texture"
+type="AtlasTexture"
+uid="uid://cmled7n5ttpem"
+path="res://.godot/imported/line.aseprite-965f2f4354b257b665b8659bbe1649f3.res"
+
+[deps]
+
+source_file="res://Game/MapGen/Sprites/line.aseprite"
+dest_files=["res://.godot/imported/line.aseprite-965f2f4354b257b665b8659bbe1649f3.res"]
+
+[params]
+
+exclude_layers_pattern=""
+only_visible_layers=false

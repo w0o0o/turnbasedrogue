@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmkk0f8ysa30w"]
+
+[ext_resource type="PackedScene" uid="uid://by4ongno34pfq" path="res://UI/Inventory/Inventory.tscn" id="10_wgq8t"]
+[ext_resource type="Script" path="res://camera.gd" id="13_d1lyy"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3.5, 3.5)
+position_smoothing_enabled = true
+position_smoothing_speed = 3.0
+script = ExtResource("13_d1lyy")
+
+[node name="Inventory" parent="." instance=ExtResource("10_wgq8t")]
+position = Vector2(0, 72)

@@ -1,0 +1,16 @@
+[remap]
+
+importer="aseprite_wizard.plugin.static-texture"
+type="AtlasTexture"
+uid="uid://cbpdfeci74qvw"
+path="res://.godot/imported/wall.aseprite-7170d718578fa0f5cfc0c0a32212a33a.res"
+
+[deps]
+
+source_file="res://Game/Levels/Blacksmith/wall.aseprite"
+dest_files=["res://.godot/imported/wall.aseprite-7170d718578fa0f5cfc0c0a32212a33a.res"]
+
+[params]
+
+exclude_layers_pattern=""
+only_visible_layers=false

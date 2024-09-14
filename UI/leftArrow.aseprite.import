@@ -1,0 +1,16 @@
+[remap]
+
+importer="aseprite_wizard.plugin.static-texture"
+type="AtlasTexture"
+uid="uid://b3el8ay6gy8dn"
+path="res://.godot/imported/leftArrow.aseprite-50090c86b864c9e3bc3d080597fa7d8d.res"
+
+[deps]
+
+source_file="res://UI/leftArrow.aseprite"
+dest_files=["res://.godot/imported/leftArrow.aseprite-50090c86b864c9e3bc3d080597fa7d8d.res"]
+
+[params]
+
+exclude_layers_pattern=""
+only_visible_layers=false

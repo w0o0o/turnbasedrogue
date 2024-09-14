@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5les0joxb36f"]
+
+[ext_resource type="Script" path="res://UI/HUD/hud.gd" id="1_ief5h"]
+[ext_resource type="Texture2D" uid="uid://bg4yeg0v6j4l6" path="res://UI/Inventory/Assets/mana.aseprite" id="2_8iboc"]
+[ext_resource type="FontFile" uid="uid://den4q0lwpa4dr" path="res://Fonts/TinyPixie2.ttf" id="3_1d4q5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xbkv0"]
+font = ExtResource("3_1d4q5")
+font_size = 6
+
+[node name="Hud" type="Node2D"]
+script = ExtResource("1_ief5h")
+
+[node name="Mana" type="Sprite2D" parent="."]
+texture = ExtResource("2_8iboc")
+
+[node name="Label" type="Label" parent="Mana"]
+unique_name_in_owner = true
+offset_left = 4.0
+offset_top = -3.0
+offset_right = 44.0
+offset_bottom = 20.0
+text = "2"
+label_settings = SubResource("LabelSettings_xbkv0")

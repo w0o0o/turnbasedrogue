@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://bpm852vnacysl"]
+
+[ext_resource type="Script" path="res://Attacks/attack.gd" id="1_atbyj"]
+
+[resource]
+script = ExtResource("1_atbyj")
+name = "Thwack"
+icon_frame = 7
+description = ""
+animation = "Attack_Front_Sword_1"
+damage_cells = Array[int]([1, 2])
+damage = 2
+mana_cost = 2
+projectile = false
+piercing = 0
+reverse = false
+direction = 0
+ramming = false

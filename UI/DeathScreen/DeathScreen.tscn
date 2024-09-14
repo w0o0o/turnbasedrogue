@@ -1,0 +1,81 @@
+[gd_scene load_steps=6 format=3 uid="uid://ch3mwcco0e4sj"]
+
+[ext_resource type="FontFile" uid="uid://spn4ve4oisi6" path="res://Fonts/TripleN.ttf" id="1_wwt2o"]
+[ext_resource type="Script" path="res://UI/DeathScreen/death_screen.gd" id="2_pfc7o"]
+[ext_resource type="PackedScene" uid="uid://cjtbx50bilof3" path="res://UI/Button/button.tscn" id="3_30txd"]
+[ext_resource type="AudioStream" uid="uid://b7a2ltyldplrs" path="res://sfx/death_sound.mp3" id="3_n82tf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pmoly"]
+font = ExtResource("1_wwt2o")
+font_size = 64
+font_color = Color(1, 0.254902, 0.239216, 1)
+
+[node name="DeathScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_pfc7o")
+animated_text = "You died"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.5
+offset_top = -11.5
+offset_right = 55.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_pmoly")
+horizontal_alignment = 1
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -97.0
+offset_top = -103.0
+offset_right = 97.0
+offset_bottom = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Restart" parent="Buttons" instance=ExtResource("3_30txd")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 5
+text = "Restart"
+auto_focus = true
+
+[node name="Quit" parent="Buttons" instance=ExtResource("3_30txd")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 5
+text = "Quit"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_n82tf")
+
+[connection signal="pressed" from="Buttons/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Buttons/Quit" to="." method="_on_quit_pressed"]

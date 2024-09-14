@@ -1,0 +1,16 @@
+[remap]
+
+importer="aseprite_wizard.plugin.static-texture"
+type="AtlasTexture"
+uid="uid://ddbw5i4mjer6p"
+path="res://.godot/imported/anvil.aseprite-0050b54919d0862a687616a643882947.res"
+
+[deps]
+
+source_file="res://Game/Levels/Blacksmith/anvil.aseprite"
+dest_files=["res://.godot/imported/anvil.aseprite-0050b54919d0862a687616a643882947.res"]
+
+[params]
+
+exclude_layers_pattern=""
+only_visible_layers=false

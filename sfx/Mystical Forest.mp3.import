@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bksmrbvjk7k8y"
+path="res://.godot/imported/Mystical Forest.mp3-5edb46ff6e1f809cc768e01f8f760a95.mp3str"
+
+[deps]
+
+source_file="res://sfx/Mystical Forest.mp3"
+dest_files=["res://.godot/imported/Mystical Forest.mp3-5edb46ff6e1f809cc768e01f8f760a95.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://dnbs7m5h8ger"]
+
+[ext_resource type="Script" path="res://Monsters/Ramsey/ramsey.gd" id="1_o8xbw"]
+[ext_resource type="SpriteFrames" uid="uid://dk2d8aqiayj8" path="res://Monsters/Ramsey/ramsey.aseprite" id="2_ae1yy"]
+[ext_resource type="Script" path="res://Attacks/attack.gd" id="2_bxgbr"]
+[ext_resource type="Resource" uid="uid://d20tyaoc3jg5y" path="res://Attacks/kick.tres" id="3_vvhig"]
+
+[node name="Ramsey" type="Node2D"]
+script = ExtResource("1_o8xbw")
+attacks = Array[ExtResource("2_bxgbr")]([ExtResource("3_vvhig")])
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = ExtResource("2_ae1yy")
+animation = &"death"
+frame = 9
+frame_progress = 1.0
+offset = Vector2(3, -20)
+
+[node name="health_pos" type="Marker2D" parent="."]
+position = Vector2(0, -24)

@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7lc76b1hti0x"]
+
+[ext_resource type="SpriteFrames" uid="uid://dye651xefoecc" path="res://Kitty/Cats/King_Mewrthur.aseprite" id="1_407iw"]
+[ext_resource type="Script" path="res://Game/Levels/Shop/ShopCat/shop_cat.gd" id="1_rty3o"]
+[ext_resource type="SpriteFrames" uid="uid://dvsr73pjp2cbe" path="res://Kitty/Cats/Meow_Knight.aseprite" id="2_xw8vy"]
+[ext_resource type="SpriteFrames" uid="uid://1ve0bma1dklu" path="res://Kitty/Cats/MEOWOLAS.aseprite" id="4_85ln2"]
+
+[node name="ShopCat" type="Node2D"]
+script = ExtResource("1_rty3o")
+selected_cat = 2
+cat_options = Array[SpriteFrames]([ExtResource("2_xw8vy"), ExtResource("1_407iw"), ExtResource("4_85ln2")])
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = ExtResource("2_xw8vy")
+animation = &"Idle"
+offset = Vector2(-4, -24)

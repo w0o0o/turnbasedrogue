@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://0uyohng78otv"]
+
+[ext_resource type="Script" path="res://UI/health.gd" id="1_bq236"]
+
+[sub_resource type="Theme" id="Theme_icb3e"]
+HBoxContainer/constants/separation = 1
+VBoxContainer/constants/separation = 2
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_injod"]
+load_path = "res://.godot/imported/heart.png-5fe1f6e7dd80df8acbb6ac96cff1a62c.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mn8m7"]
+atlas = SubResource("CompressedTexture2D_injod")
+region = Rect2(0, 0, 8, 8)
+
+[node name="Health" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+theme = SubResource("Theme_icb3e")
+script = ExtResource("1_bq236")
+health_texture = SubResource("AtlasTexture_mn8m7")
+health = 15

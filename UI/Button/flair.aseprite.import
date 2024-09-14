@@ -1,0 +1,16 @@
+[remap]
+
+importer="aseprite_wizard.plugin.static-texture"
+type="AtlasTexture"
+uid="uid://c4ctbkhh5hk5j"
+path="res://.godot/imported/flair.aseprite-c13bb64a9d1dc7440202b890aac5fb58.res"
+
+[deps]
+
+source_file="res://UI/Button/flair.aseprite"
+dest_files=["res://.godot/imported/flair.aseprite-c13bb64a9d1dc7440202b890aac5fb58.res"]
+
+[params]
+
+exclude_layers_pattern=""
+only_visible_layers=false

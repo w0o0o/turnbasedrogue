@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://d20tyaoc3jg5y"]
+
+[ext_resource type="Script" path="res://Attacks/attack.gd" id="1_lsalo"]
+
+[resource]
+script = ExtResource("1_lsalo")
+name = "Kick"
+description = ""
+animation = "Attack_Front_Kick"
+damage_cells = Array[int]([1])
+damage = 1
+mana_cost = 1
+projectile = false
+piercing = 0
+reverse = false
+direction = 0
+ramming = false

@@ -1,0 +1,16 @@
+[remap]
+
+importer="aseprite_wizard.plugin.static-texture"
+type="AtlasTexture"
+uid="uid://pdl0jhqxn5g"
+path="res://.godot/imported/aggrro.aseprite-64f7cb00f3cb0fdafae8eed1188824c1.res"
+
+[deps]
+
+source_file="res://UI/aggrro.aseprite"
+dest_files=["res://.godot/imported/aggrro.aseprite-64f7cb00f3cb0fdafae8eed1188824c1.res"]
+
+[params]
+
+exclude_layers_pattern=""
+only_visible_layers=false

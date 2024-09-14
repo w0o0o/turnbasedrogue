@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://d1rk1hmn21dih"]
+
+[ext_resource type="Script" path="res://Game/Levels/Shop/flicker.gd" id="1_fbpjm"]
+
+[sub_resource type="Gradient" id="Gradient_ko8m6"]
+colors = PackedColorArray(0.768627, 0.498039, 0.219608, 1, 0.62, 0.28148, 0.1364, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wefaa"]
+gradient = SubResource("Gradient_ko8m6")
+fill = 1
+fill_from = Vector2(0.491453, 0.491453)
+fill_to = Vector2(0.136752, 0.132479)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_03rvh"]
+frequency = 0.0257
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vduuh"]
+noise = SubResource("FastNoiseLite_03rvh")
+
+[node name="Flicker" type="PointLight2D"]
+position = Vector2(49, 35)
+color = Color(1, 0.664, 0.52, 1)
+energy = 3.41841
+texture = SubResource("GradientTexture2D_wefaa")
+texture_scale = 0.4
+script = ExtResource("1_fbpjm")
+noise = SubResource("NoiseTexture2D_vduuh")
+min_energy = 3.0
+max_energy = 20.0

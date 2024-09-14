@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bi7hr8oybtww3"]
+
+[ext_resource type="Script" path="res://Game/MapGen/map.gd" id="1_mc0ak"]
+[ext_resource type="Script" path="res://Game/MapGen/map_generator.gd" id="1_pk3on"]
+[ext_resource type="SpriteFrames" uid="uid://dvsr73pjp2cbe" path="res://Kitty/Cats/Meow_Knight.aseprite" id="3_34q7p"]
+
+[node name="Map" type="Node2D"]
+script = ExtResource("1_mc0ak")
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="Lines" type="Node2D" parent="Visuals"]
+unique_name_in_owner = true
+
+[node name="Rooms" type="Node2D" parent="Visuals"]
+unique_name_in_owner = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals"]
+sprite_frames = ExtResource("3_34q7p")
+animation = &"Idle"
+frame_progress = 0.765916
+
+[node name="MapGenerator" type="Node" parent="."]
+script = ExtResource("1_pk3on")

@@ -1,0 +1,16 @@
+[remap]
+
+importer="aseprite_wizard.plugin.static-texture"
+type="AtlasTexture"
+uid="uid://b0mvglfbnt0q7"
+path="res://.godot/imported/stump.aseprite-98ce5fd735241a8e25b181ec95909ef6.res"
+
+[deps]
+
+source_file="res://Game/Levels/Blacksmith/stump.aseprite"
+dest_files=["res://.godot/imported/stump.aseprite-98ce5fd735241a8e25b181ec95909ef6.res"]
+
+[params]
+
+exclude_layers_pattern=""
+only_visible_layers=false

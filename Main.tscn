@@ -1,0 +1,188 @@
+[gd_scene load_steps=17 format=3 uid="uid://b7xev4ihe5frv"]
+
+[ext_resource type="Script" path="res://LevelManager.gd" id="1_mfhm3"]
+[ext_resource type="PackedScene" uid="uid://0uyohng78otv" path="res://UI/Health.tscn" id="2_1doc7"]
+[ext_resource type="PackedScene" uid="uid://by4ongno34pfq" path="res://UI/Inventory/Inventory.tscn" id="3_04ncj"]
+[ext_resource type="Texture2D" uid="uid://bfb566wl1xp2j" path="res://UI/Assets/Inputs/KEYBOARD/KEY_LEFT_ALT.PNG" id="3_a8lcb"]
+[ext_resource type="Texture2D" uid="uid://camxr00spul6c" path="res://UI/heart.png" id="3_lhnj6"]
+[ext_resource type="PackedScene" uid="uid://ch3mwcco0e4sj" path="res://UI/DeathScreen/DeathScreen.tscn" id="3_ncjdl"]
+[ext_resource type="Script" path="res://camera.gd" id="5_3ny4o"]
+[ext_resource type="Texture2D" uid="uid://dg4i1g0j443bf" path="res://UI/Assets/Inputs/KEYBOARD/KEY_RIGHT_ALT.PNG" id="5_rg1vv"]
+[ext_resource type="Texture2D" uid="uid://v7worihivmu5" path="res://UI/Assets/Inputs/KEYBOARD/KEY_DOWN_ALT.PNG" id="6_4wrxk"]
+[ext_resource type="FontFile" uid="uid://spn4ve4oisi6" path="res://Fonts/TripleN.ttf" id="6_s7f2m"]
+[ext_resource type="Texture2D" uid="uid://d12bkjxsqle8g" path="res://UI/Assets/Inputs/KEYBOARD/KEY_UP_ALT.PNG" id="7_i6thg"]
+[ext_resource type="AudioStream" uid="uid://b7axuigt7cxl3" path="res://sfx/night-ambience-17064.mp3" id="14_2vjva"]
+[ext_resource type="PackedScene" uid="uid://c5les0joxb36f" path="res://UI/HUD/HUD.tscn" id="14_kikfi"]
+[ext_resource type="AudioStream" uid="uid://bksmrbvjk7k8y" path="res://sfx/Mystical Forest.mp3" id="17_c5c6d"]
+[ext_resource type="PackedScene" uid="uid://bi7hr8oybtww3" path="res://Game/MapGen/Map.tscn" id="18_h7w7t"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wckbj"]
+font = ExtResource("6_s7f2m")
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_mfhm3")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0.329412)
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 14.0
+offset_top = -93.0
+offset_right = 30.0
+offset_bottom = -77.0
+texture = ExtResource("3_a8lcb")
+expand_mode = 1
+stretch_mode = 1
+metadata/_aseprite_wizard_interface_config_ = {
+"slice_section": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/TextureRect"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 23.0
+offset_top = 1.0
+offset_right = 102.0
+offset_bottom = 24.0
+text = "Move Left"
+label_settings = SubResource("LabelSettings_wckbj")
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 21.0
+offset_top = -71.0
+offset_right = 37.0
+offset_bottom = -55.0
+texture = ExtResource("5_rg1vv")
+expand_mode = 1
+stretch_mode = 1
+metadata/_aseprite_wizard_interface_config_ = {
+"slice_section": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/TextureRect2"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 23.0
+offset_top = 1.0
+offset_right = 102.0
+offset_bottom = 24.0
+text = "Move Right"
+label_settings = SubResource("LabelSettings_wckbj")
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/Control"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 30.0
+offset_top = -48.0
+offset_right = 46.0
+offset_bottom = -32.0
+texture = ExtResource("6_4wrxk")
+expand_mode = 1
+stretch_mode = 1
+metadata/_aseprite_wizard_interface_config_ = {
+"slice_section": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/TextureRect3"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 23.0
+offset_top = 1.0
+offset_right = 102.0
+offset_bottom = 24.0
+text = "Attack"
+label_settings = SubResource("LabelSettings_wckbj")
+
+[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/Control"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 38.0
+offset_top = -26.0
+offset_right = 54.0
+offset_bottom = -10.0
+texture = ExtResource("7_i6thg")
+expand_mode = 1
+stretch_mode = 1
+metadata/_aseprite_wizard_interface_config_ = {
+"slice_section": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/TextureRect4"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 23.0
+offset_top = 1.0
+offset_right = 102.0
+offset_bottom = 24.0
+text = "Turn Around"
+label_settings = SubResource("LabelSettings_wckbj")
+
+[node name="Health" parent="CanvasLayer" instance=ExtResource("2_1doc7")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -83.0
+offset_top = 17.0
+offset_right = -83.0
+offset_bottom = 17.0
+grow_horizontal = 0
+scale = Vector2(4, 4)
+mouse_filter = 2
+health_texture = ExtResource("3_lhnj6")
+health = 9
+per_row = 3
+
+[node name="Control2" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="DeathScreen" parent="CanvasLayer" instance=ExtResource("3_ncjdl")]
+visible = false
+mouse_filter = 2
+
+[node name="Map" parent="." instance=ExtResource("18_h7w7t")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3.5, 3.5)
+position_smoothing_enabled = true
+position_smoothing_speed = 3.0
+script = ExtResource("5_3ny4o")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_2vjva")
+volume_db = -9.882
+autoplay = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_c5c6d")
+volume_db = -32.444
+autoplay = true
+
+[node name="Below" type="Node2D" parent="."]
+
+[node name="Hud" parent="." instance=ExtResource("14_kikfi")]
+position = Vector2(144, 82)
+
+[node name="Inventory" parent="." instance=ExtResource("3_04ncj")]
+z_index = 3180
+position = Vector2(0, 78)

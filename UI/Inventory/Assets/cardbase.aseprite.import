@@ -1,0 +1,16 @@
+[remap]
+
+importer="aseprite_wizard.plugin.static-texture"
+type="AtlasTexture"
+uid="uid://be54y04enc1y5"
+path="res://.godot/imported/cardbase.aseprite-b0b1cf40aa707b3d0198ab5daa5508bc.res"
+
+[deps]
+
+source_file="res://UI/Inventory/Assets/cardbase.aseprite"
+dest_files=["res://.godot/imported/cardbase.aseprite-b0b1cf40aa707b3d0198ab5daa5508bc.res"]
+
+[params]
+
+exclude_layers_pattern=""
+only_visible_layers=false

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://c6hrw72pfcxs0"]
+
+[ext_resource type="Script" path="res://Attacks/attack.gd" id="1_yjdpc"]
+
+[resource]
+script = ExtResource("1_yjdpc")
+name = "Slash"
+icon_frame = 2
+description = ""
+animation = "Attack_Both_1"
+damage_cells = Array[int]([-1, 1])
+damage = 2
+mana_cost = 2
+projectile = false
+piercing = 0
+reverse = false
+direction = 0
+ramming = false

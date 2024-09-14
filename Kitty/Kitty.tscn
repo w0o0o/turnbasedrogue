@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://mhlg0kh5p530"]
+
+[ext_resource type="Script" path="res://Kitty/Player.gd" id="1_37moo"]
+[ext_resource type="SpriteFrames" uid="uid://dye651xefoecc" path="res://Kitty/Cats/King_Mewrthur.aseprite" id="2_cub43"]
+[ext_resource type="SpriteFrames" uid="uid://1ve0bma1dklu" path="res://Kitty/Cats/MEOWOLAS.aseprite" id="2_g8rv1"]
+[ext_resource type="SpriteFrames" uid="uid://dvsr73pjp2cbe" path="res://Kitty/Cats/Meow_Knight.aseprite" id="2_kqkm0"]
+
+[node name="Kitty" type="Node2D"]
+script = ExtResource("1_37moo")
+cat_frames = ExtResource("2_cub43")
+selected_cat = 1
+cat_options = Array[SpriteFrames]([ExtResource("2_kqkm0"), ExtResource("2_cub43"), ExtResource("2_g8rv1")])
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = ExtResource("2_cub43")
+animation = &"Idle"
+frame_progress = 0.330942
+offset = Vector2(-4, -24)
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animation_finished"]

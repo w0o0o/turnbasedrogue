@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://bos33mteliaeo"]
+
+[ext_resource type="Script" path="res://Attacks/attack.gd" id="1_itkj5"]
+
+[resource]
+script = ExtResource("1_itkj5")
+name = "Arrow"
+icon_frame = 3
+description = ""
+animation = "Attack_Front_Bow_1"
+damage_cells = Array[int]([])
+damage = 2
+mana_cost = 1
+projectile = true
+piercing = 1
+reverse = false
+direction = 1
+ramming = false

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://j2ymedvxe5ny"]
+
+[ext_resource type="Script" path="res://Attacks/attack.gd" id="1_x7i1u"]
+
+[resource]
+script = ExtResource("1_x7i1u")
+name = "Electric Arrow"
+icon_frame = 3
+description = ""
+animation = "Attack_Front_Bow_2"
+damage_cells = Array[int]([])
+damage = 3
+mana_cost = 3
+projectile = true
+piercing = 2
+reverse = false
+direction = 1
+ramming = false

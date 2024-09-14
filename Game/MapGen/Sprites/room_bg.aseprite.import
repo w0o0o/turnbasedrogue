@@ -1,0 +1,16 @@
+[remap]
+
+importer="aseprite_wizard.plugin.static-texture"
+type="AtlasTexture"
+uid="uid://byy4j6c3q7gda"
+path="res://.godot/imported/room_bg.aseprite-9aa210c5f87f84e8fe579758faed03a7.res"
+
+[deps]
+
+source_file="res://Game/MapGen/Sprites/room_bg.aseprite"
+dest_files=["res://.godot/imported/room_bg.aseprite-9aa210c5f87f84e8fe579758faed03a7.res"]
+
+[params]
+
+exclude_layers_pattern=""
+only_visible_layers=false

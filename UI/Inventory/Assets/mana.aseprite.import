@@ -1,0 +1,16 @@
+[remap]
+
+importer="aseprite_wizard.plugin.static-texture"
+type="AtlasTexture"
+uid="uid://bg4yeg0v6j4l6"
+path="res://.godot/imported/mana.aseprite-78aa3c94e7c8d5ee980379b328926296.res"
+
+[deps]
+
+source_file="res://UI/Inventory/Assets/mana.aseprite"
+dest_files=["res://.godot/imported/mana.aseprite-78aa3c94e7c8d5ee980379b328926296.res"]
+
+[params]
+
+exclude_layers_pattern=""
+only_visible_layers=false

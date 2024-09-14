@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://cny35tx10pp8x"]
+
+[ext_resource type="Script" path="res://Attacks/attack.gd" id="1_khsxi"]
+
+[resource]
+script = ExtResource("1_khsxi")
+name = "Reverse"
+animation = "Attack_Both_1"
+damage_cells = Array[int]([])
+damage = 2
+mana_cost = 1
+projectile = false
+piercing = 1
+reverse = true
+direction = 1

@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://krtjfw1vb58u"]
+
+[ext_resource type="SpriteFrames" uid="uid://b8tc1h0rjdu08" path="res://Monsters/BossReaper/reaper.aseprite" id="1_clcq8"]
+[ext_resource type="Script" path="res://Monsters/BossReaper/reaper.gd" id="1_fpq66"]
+[ext_resource type="Script" path="res://Attacks/attack.gd" id="2_uq5ev"]
+[ext_resource type="SpriteFrames" uid="uid://c0xjgf5mowjol" path="res://particles/Splatter.aseprite" id="5_3wncj"]
+
+[sub_resource type="Resource" id="Resource_ihskr"]
+script = ExtResource("2_uq5ev")
+name = "Slash"
+icon_frame = 0
+description = ""
+animation = "Attack_Both_1"
+damage_cells = Array[int]([-1, 1])
+damage = 3
+mana_cost = 2
+projectile = false
+piercing = 0
+reverse = false
+direction = 0
+ramming = false
+
+[node name="Reaper" type="Node2D"]
+script = ExtResource("1_fpq66")
+attacks = Array[ExtResource("2_uq5ev")]([SubResource("Resource_ihskr")])
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = ExtResource("1_clcq8")
+animation = &"attack_1"
+offset = Vector2(1, -25)
+
+[node name="Blood" type="AnimatedSprite2D" parent="AnimatedSprite2D"]
+visible = false
+position = Vector2(-12, -38)
+sprite_frames = ExtResource("5_3wncj")
+
+[node name="health_pos" type="Marker2D" parent="."]
+position = Vector2(0, -54)
+
+[connection signal="animation_finished" from="AnimatedSprite2D/Blood" to="." method="_on_blood_animation_finished"]

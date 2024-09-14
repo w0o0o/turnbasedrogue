@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://djbv42jk1t2i8"]
+
+[ext_resource type="Script" path="res://Attacks/attack.gd" id="1_uxe1v"]
+
+[resource]
+script = ExtResource("1_uxe1v")
+name = "Ram"
+animation = "Attack_Front_Kick"
+damage_cells = Array[int]([])
+damage = 10
+mana_cost = 4
+projectile = false
+piercing = 0
+reverse = false
+direction = 1
+ramming = true

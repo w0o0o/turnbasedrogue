@@ -1,0 +1,16 @@
+[remap]
+
+importer="aseprite_wizard.plugin.static-texture"
+type="AtlasTexture"
+uid="uid://wee70hxgwwag"
+path="res://.godot/imported/flag.aseprite-513aff436550e599cd7977b878f59bec.res"
+
+[deps]
+
+source_file="res://Game/Levels/Blacksmith/flag.aseprite"
+dest_files=["res://.godot/imported/flag.aseprite-513aff436550e599cd7977b878f59bec.res"]
+
+[params]
+
+exclude_layers_pattern=""
+only_visible_layers=false

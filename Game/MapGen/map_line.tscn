@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://crrq3a3p06hme"]
+
+[ext_resource type="Texture2D" uid="uid://cmled7n5ttpem" path="res://Game/MapGen/Sprites/line.aseprite" id="1_4tj81"]
+
+[node name="MapLine" type="Line2D"]
+texture_repeat = 2
+width = 4.0
+texture = ExtResource("1_4tj81")
+texture_mode = 1

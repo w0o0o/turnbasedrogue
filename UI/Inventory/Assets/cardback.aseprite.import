@@ -1,0 +1,16 @@
+[remap]
+
+importer="aseprite_wizard.plugin.static-texture"
+type="AtlasTexture"
+uid="uid://baudmyxtargry"
+path="res://.godot/imported/cardback.aseprite-f0eedc35528d1747791009ae31ad3f16.res"
+
+[deps]
+
+source_file="res://UI/Inventory/Assets/cardback.aseprite"
+dest_files=["res://.godot/imported/cardback.aseprite-f0eedc35528d1747791009ae31ad3f16.res"]
+
+[params]
+
+exclude_layers_pattern=""
+only_visible_layers=false

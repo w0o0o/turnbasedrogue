@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbhoaw1gx7rmc"]
+
+[ext_resource type="Script" path="res://UI/Inventory/IconLabels/mana_label.gd" id="1_5xjeu"]
+[ext_resource type="Texture2D" uid="uid://bg4yeg0v6j4l6" path="res://UI/Inventory/Assets/mana.aseprite" id="1_ae64r"]
+
+[node name="ManaLabel" type="Node2D"]
+script = ExtResource("1_5xjeu")
+mana_count = 8
+cols = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-6, 0)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("1_ae64r")
