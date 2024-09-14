@@ -3,12 +3,17 @@ class_name GameManager
 
 var difficulty = 0
 
+# Enemies
 var skelly = preload("res://Monsters/Skeleton.tscn")
 var ramses = preload("res://Monsters/Ramsey/Ramsey.tscn")
+var bat = preload("res://Monsters/Bat/Bat.tscn")
+
+# Bosses
 var reaper = preload("res://Monsters/BossReaper/Reaper.tscn")
-var enemy_opts = [skelly, ramses]
+
+var enemy_opts = [skelly, ramses, bat]
 var bosses = [reaper]
-var enemy_options = [skelly, ramses]
+var enemy_options = [skelly, ramses, bat]
 var cells: Array[Entity] = []
 var numCells = 5
 var boss_battle: bool = false

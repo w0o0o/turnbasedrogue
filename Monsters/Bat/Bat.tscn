@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://snnb3esqqr5m"]
+
+[ext_resource type="Script" path="res://Monsters/Bat/bat.gd" id="1_p6f7d"]
+[ext_resource type="Script" path="res://Attacks/attack.gd" id="2_5lm6c"]
+[ext_resource type="SpriteFrames" uid="uid://wcq1nvme3xdi" path="res://Monsters/Bat/bat.aseprite" id="2_pmyvn"]
+
+[sub_resource type="Resource" id="Resource_hilru"]
+script = ExtResource("2_5lm6c")
+name = "Fly"
+icon_frame = 0
+description = ""
+animation = ""
+damage_cells = Array[int]([])
+damage = 2
+mana_cost = 1
+projectile = false
+piercing = 0
+reverse = false
+direction = 1
+ramming = true
+
+[node name="Bat" type="Node2D"]
+script = ExtResource("1_p6f7d")
+attacks = Array[ExtResource("2_5lm6c")]([SubResource("Resource_hilru")])
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.427493, 0.427493, 0.427493, 1)
+texture_filter = 1
+sprite_frames = ExtResource("2_pmyvn")
+animation = &"idle"
+frame_progress = 0.543001
+offset = Vector2(1, -20)
+
+[node name="health_pos" type="Marker2D" parent="."]
+position = Vector2(0, -36)
