@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_lsalo")
 name = "Kick"
+icon_frame = 0
 description = ""
 animation = "Attack_Front_Kick"
 damage_cells = Array[int]([1])

@@ -73,7 +73,6 @@ func load_all_attacks(dir):
 		if file_name.ends_with(".tres.remap") or file_name.ends_with(".tres"):
 			var file_base_name = file_name.replace(".remap", "")
 			file_base_name = file_base_name.replace(".tres", "")
-			print("Loading attack: " + file_base_name)
 			var attack = ResourceLoader.load(dir + "/" + file_base_name + ".tres")
 			if attack is Attack:
 				attack_library[attack.name] = attack
@@ -81,39 +80,37 @@ func load_all_attacks(dir):
 	print("Loaded attacks: " + str(attack_library.keys()))
 
 func add_to_discard_pile(attack: Attack):
-	discard_pile.append(attack)
+	discard_pile.append(attack.name)
+	pass
+
+var available_library = []
+
+func fill_discard_pile():
+	for attack in attack_library.keys():
+		available_library.append(attack)
 	pass
 
 func reset_discard_pile():
-	var library = attack_library.keys()
-	picked_attacks.clear()
+	var new_pile = []
+	for attack in discard_pile:
+		new_pile.append(attack)
 	discard_pile.clear()
-	return library
-
+	new_pile.shuffle()
+	return new_pile
 func choose_random_attacks(amount: int) -> Array:
 	var attacks = []
-	var library = attack_library.keys()
 	if test_attack != null:
 		for i in amount:
 			attacks.append(attack_library[test_attack].duplicate())
 		return attacks
-
-	# remove already picked attacks
-	for attack in picked_attacks:
-		library.erase(attack.name)
-	#	remove cards in discard pile
-	for attack in discard_pile:
-		library.erase(attack.name)
-	if library.size() < amount:
-		library = reset_discard_pile()
-
-
 	for i in range(amount):
-		var attack = library.pick_random()
-		library.erase(attack)
+		if available_library.size() == 0:
+			available_library = reset_discard_pile()
+		
+		var attack = available_library.pick_random()
+		available_library.erase(attack)
 		var this_attack = attack_library[attack].duplicate()
 		attacks.append(this_attack)
-		picked_attacks.append(this_attack)
 	return attacks
 			
 
@@ -138,6 +135,7 @@ func place_cells(cell_scene, cp) -> void:
 
 
 func cleanup():
+	fill_discard_pile()
 	turns = 0
 	cells.clear()
 	for enemy in enemies:
@@ -163,7 +161,7 @@ func randomize_level():
 		max_enemies = min(numCells - 2, randi_range(2, 4 + difficulty))
 
 
-func setup(p, l, cell_scene, cell_parent):
+func setup(p, l, cell_scene, cells_parent):
 	cleanup()
 	print("Setting up game manager")
 	randomize_level()
@@ -173,24 +171,23 @@ func setup(p, l, cell_scene, cell_parent):
 	entities = Node2D.new()
 	entities.hide()
 	level.add_child(entities)
-	place_cells(cell_scene, cell_parent)
+	place_cells(cell_scene, cells_parent)
 	for i in range(numCells):
 		cells.append(null)
 	
 	player.cell = -1
 	player.gm = self
 	player.top_level = true
+	play()
 
 func play():
-	var middle_cell = numCells / 2
-	middle_cell = int(middle_cell)
+	var middle_cell = float(numCells) / float(2)
+	middle_cell = floor(middle_cell)
 	cells[middle_cell] = player
 
 	level.add_child(player)
 	player.cell = middle_cell
 	player.facing = 1
-	player.start()
-
 	spawn_enemy()
 	
 	entities.show()
@@ -291,8 +288,8 @@ func move(entity: Entity, direction: int):
 func damage_entity(entity: Entity, damage: int):
 	if entity is not Player:
 		hit_enemies_this_move += 1
-	var dead = entity.damage(damage)
-	if dead:
+	var is_dead = entity.damage(damage)
+	if is_dead:
 		if entity is not Player:
 			killed_enemies_this_move += 1
 			_on_enemy_death(entity)
@@ -308,9 +305,10 @@ func _on_enemy_death(enemy: Entity):
 
 	pass
 
+var disable_printing = true
 func print_cells():
-	return
-	# print("\n\n\n\n\n\n\n\n\n\n\n\n")
+	if disable_printing:
+		return
 	var cell_str = ""
 	var stat_str = ""
 	var direction_str = ""
@@ -354,8 +352,7 @@ func place_enemy(enemy: Entity):
 func on_death():
 	dead = true
 
-func enemies_updated(e):
-	print("Enemies updated")
+func enemies_updated(_e):
 	pass
 
 

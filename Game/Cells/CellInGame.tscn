@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Game/Cells/cell_in_game.gd" id="1_5l001"]
 [ext_resource type="SpriteFrames" uid="uid://dh3qonr5lkvug" path="res://Effects/Explosion03.aseprite" id="2_egl51"]
 [ext_resource type="Texture2D" uid="uid://b35whvs5jidh5" path="res://Game/Cells/cellSprite_Dark.png" id="3_pl42o"]
-[ext_resource type="Texture2D" uid="uid://cbngi550u7u" path="res://Game/Cells/cellSprite_Light.png" id="4_fuley"]
+[ext_resource type="Texture2D" uid="uid://cjesyxo83yhhu" path="res://Game/Cells/cellSprite_Light.png" id="4_fuley"]
 
 [node name="CellInGame" type="Node2D"]
 z_index = 10
@@ -18,12 +18,14 @@ frame = 11
 frame_progress = 1.0
 
 [node name="Dark" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
 texture_filter = 1
 position = Vector2(0, 3)
 texture = ExtResource("3_pl42o")
 
 [node name="Light" type="Sprite2D" parent="."]
 visible = false
+modulate = Color(1, 1, 1, 0)
 texture_filter = 1
 position = Vector2(0, 3)
 texture = ExtResource("4_fuley")

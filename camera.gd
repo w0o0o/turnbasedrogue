@@ -28,7 +28,6 @@ func _process(delta: float) -> void:
         if duration > 0.0:
             var x = noise.noise.get_noise_2d(duration, 0) * 0.5
             var y = noise.noise.get_noise_2d(0, duration)
-            print(x, " : ", y)
             duration -= delta
             offset = (Vector2(x, y) * strength) + Vector2(current_offset_x, 0)
         else:

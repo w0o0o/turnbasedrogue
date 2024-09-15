@@ -20,6 +20,7 @@ func _ready() -> void:
 	on_running_turns(State.gm.running_turns)
 	Messenger.mana_changed.connect(on_mana_changed)
 	$AnimationPlayer.play("show")
+	on_mana_changed(State.mana)
 
 
 func on_mana_changed(mana: int):
@@ -30,21 +31,10 @@ func on_mana_changed(mana: int):
 			$Cardbase.modulate = Color.WHITE
 
 func on_running_turns(running: bool):
-	print("Running turns: ", running)
 	if running:
 		prevent_hover = true
-		if focus:
-			$AnimationPlayer.play_backwards("focus_hover")
-			%ManaLabel.hide_mana()
-			focus = false
-			was_focussed = true
 	else:
 		prevent_hover = false
-		if was_focussed:
-			$AnimationPlayer.play("focus_hover")
-			%ManaLabel.show_mana()
-			focus = true
-			was_focussed = false
 
 func on_attack_upgraded(attack: Attack):
 	if attack_data and attack_data.name == attack.name:
@@ -99,8 +89,8 @@ func set_deck(v):
 	deck = v
 	if deck:
 		$Cardbase.modulate = Color.PALE_VIOLET_RED
-		$Cardbase/Label.text = "Draw"
-		$Cardbase/Tooltip.set_tooltip("Draw a new card")
+		$Cardbase/Label.text = "Redraw"
+		$Cardbase/Tooltip.set_tooltip("Discard current hand and draw 3 new cards.\nCosts 3 mana")
 		%ManaLabel.mana_count = 0
 		%ManaLabel.hide()
 
@@ -125,10 +115,6 @@ func _input(event: InputEvent) -> void:
 			tool_tipped = false
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if event is InputEventMouseMotion:
-		if not focus:
-			hovered = true
-			get_parent().focus_card_hover(self)
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			emit_signal("pressed", self)
@@ -167,10 +153,9 @@ func _on_area_2d_mouse_exited() -> void:
 
 
 func _on_area_2d_mouse_entered() -> void:
-	# await get_tree().create_timer(5.0).timeout
-	# if hovered:
-	# 	$Cardbase/Tooltip.show_tooltip()
-	# 	tool_tipped = true
+	if not hovered:
+		hovered = true
+		get_parent().focus_card_hover(self)
 	pass # Replace with function body.
 
 func manual_tool_tip_show() -> void:

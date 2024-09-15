@@ -24,7 +24,6 @@ var room: Room: set = set_room
 
 func set_focused(new_value: bool) -> void:
 	focused = new_value
-	print("focused: ", focused)
 	if focused:
 		$Visuals/Sprite2D2.modulate = Color.WHITE
 		animation_player.play("highlight")
@@ -33,7 +32,6 @@ func set_focused(new_value: bool) -> void:
 
 func set_available(new_value: bool) -> void:
 	available = new_value
-	print("available: ", available)
 	if available:
 		animation_player.play("available")
 		$Visuals/Sprite2D2.modulate = Color.WHITE

@@ -1,0 +1,80 @@
+[gd_scene load_steps=8 format=3 uid="uid://d3nyhr7wef1hr"]
+
+[ext_resource type="Script" path="res://UI/SpeechBubble/speech_bubble.gd" id="1_dboi0"]
+[ext_resource type="Theme" uid="uid://bi5ojquhrato2" path="res://UI/Theme.tres" id="1_vilk6"]
+[ext_resource type="FontFile" uid="uid://den4q0lwpa4dr" path="res://Fonts/TinyPixie2.ttf" id="3_lt0n3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kow5t"]
+font = ExtResource("3_lt0n3")
+font_size = 6
+font_color = Color(0.352941, 0.411765, 0.533333, 1)
+
+[sub_resource type="Animation" id="Animation_snio2"]
+resource_name = "show"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lpvtr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oaoco"]
+_data = {
+"RESET": SubResource("Animation_lpvtr"),
+"show": SubResource("Animation_snio2")
+}
+
+[node name="SpeechBubble" type="Node2D"]
+scale = Vector2(1e-05, 1)
+script = ExtResource("1_dboi0")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -46.0
+offset_right = 28.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(28, 16)
+theme = ExtResource("1_vilk6")
+theme_type_variation = &"SpeechBubble"
+
+[node name="Label" type="Label" parent="PanelContainer"]
+custom_minimum_size = Vector2(50, 10)
+layout_mode = 2
+size_flags_vertical = 1
+text = "asdfasdf"
+label_settings = SubResource("LabelSettings_kow5t")
+autowrap_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_oaoco")
+}

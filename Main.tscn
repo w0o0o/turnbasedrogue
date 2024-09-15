@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://b7xev4ihe5frv"]
+[gd_scene load_steps=18 format=3 uid="uid://b7xev4ihe5frv"]
 
 [ext_resource type="Script" path="res://LevelManager.gd" id="1_mfhm3"]
 [ext_resource type="PackedScene" uid="uid://0uyohng78otv" path="res://UI/Health.tscn" id="2_1doc7"]
+[ext_resource type="Script" path="res://canvas_layer.gd" id="2_ahhvy"]
 [ext_resource type="PackedScene" uid="uid://by4ongno34pfq" path="res://UI/Inventory/Inventory.tscn" id="3_04ncj"]
 [ext_resource type="Texture2D" uid="uid://bfb566wl1xp2j" path="res://UI/Assets/Inputs/KEYBOARD/KEY_LEFT_ALT.PNG" id="3_a8lcb"]
 [ext_resource type="Texture2D" uid="uid://camxr00spul6c" path="res://UI/heart.png" id="3_lhnj6"]
@@ -24,6 +25,8 @@ script = ExtResource("1_mfhm3")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 visible = false
+follow_viewport_enabled = true
+script = ExtResource("2_ahhvy")
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 modulate = Color(1, 1, 1, 0.329412)
@@ -160,6 +163,13 @@ mouse_filter = 2
 visible = false
 mouse_filter = 2
 
+[node name="Hud" parent="CanvasLayer" instance=ExtResource("14_kikfi")]
+position = Vector2(144, 82)
+
+[node name="Inventory" parent="CanvasLayer" instance=ExtResource("3_04ncj")]
+z_index = 3180
+position = Vector2(0, 78)
+
 [node name="Map" parent="." instance=ExtResource("18_h7w7t")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -179,10 +189,3 @@ volume_db = -32.444
 autoplay = true
 
 [node name="Below" type="Node2D" parent="."]
-
-[node name="Hud" parent="." instance=ExtResource("14_kikfi")]
-position = Vector2(144, 82)
-
-[node name="Inventory" parent="." instance=ExtResource("3_04ncj")]
-z_index = 3180
-position = Vector2(0, 78)

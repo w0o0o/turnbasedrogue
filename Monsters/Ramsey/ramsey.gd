@@ -17,7 +17,7 @@ func _on_death():
 	tween.tween_property(self, "position:y", position.y + 50, 6.0)
 
 
-func _on_move(direction: int):
+func _on_move(_direction: int):
 	if entity_state == EntityState.IDLE:
 		$AnimatedSprite2D.play("walk")
 
@@ -26,12 +26,12 @@ func _on_move_finished():
 	if entity_state == EntityState.IDLE:
 		$AnimatedSprite2D.play("idle")
 
-func _on_damage(damage: int):
+func _on_damage(_damage_amount: int):
 	await wait_for_animation($AnimatedSprite2D, "hit")
 	$AnimatedSprite2D.play("idle")
 
 
-func _on_attack(attack):
+func _on_attack(_attack):
 	var duration = get_animation_duration($AnimatedSprite2D, "attack")
 	await wait_for_animation($AnimatedSprite2D, "attack", 0.35) # 35% of the animation duration
 	return duration * 0.65 # 65% of the animation duration

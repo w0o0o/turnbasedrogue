@@ -133,10 +133,7 @@ func _connect_lines(room: Room) -> void:
 
 
 func center_next_rooms() -> void:
-	print("centering next rooms %s" % floors_climbed)
 	var rms := get_floor_rooms(floors_climbed)
-	for r in rms:
-		print(r.room)
 	var lowest := 0
 	var highest := 0
 	for room: MapRoom in rms:
@@ -150,7 +147,6 @@ func center_next_rooms() -> void:
 		ypos = last_room.position.y - MapGenerator.Y_DIST
 	var tween = get_tree().create_tween()
 	tween.tween_property($Visuals, "position", Vector2(middle_pos, -ypos), 0.3)
-	print("centered %s" % middle_pos)
 
 func _on_map_room_selected(room: Room) -> void:
 	disabled = true

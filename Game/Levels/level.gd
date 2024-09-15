@@ -11,9 +11,6 @@ func start(level, boss_battle = false) -> void:
 	Messenger.death.connect(on_death)
 	Messenger.reset.connect(on_reset)
 
-func play():
-	State.gm.play()
-
 
 func on_death():
 	for child in get_children():

@@ -12,6 +12,7 @@ var used_hover = false
 
 var blacksmith_anvil = null
 var last_hovered = 0
+var shuffle_deck_cost = 3
 
 func _ready() -> void:
 	Messenger.attack_added_to_library.connect(_on_attack_added_to_library)
@@ -25,11 +26,17 @@ func _ready() -> void:
 	test.damage = 1
 	place_deck()
 	place_skip()
-	pass
+	Messenger.force_tutorial_input.connect(_on_force_tutorial_input)
+
+var allowed_input
+func _on_force_tutorial_input(input_name):
+	if input_name == "":
+		allowed_input = null
+	else:
+		allowed_input = input_name
 
 func set_cards_held(new_value):
 	cards_held = new_value
-	print("Cards held: ", cards_held.size())
 	if cards_held.size() >= max_hand_size:
 		deck.modulate = Color(1, 1, 1, 0.5)
 	else:
@@ -79,28 +86,46 @@ func _on_attack_pressed(card: Card) -> void:
 	if disabled:
 		return
 	if card.deck:
-		if State.mana < 1:
+		if allowed_input != null and allowed_input != "draw_card":
 			return
-		State.mana -= 1
-		if cards_held.size() >= max_hand_size:
+
+
+		if State.mana < shuffle_deck_cost:
 			return
-		var new_attack = State.gm.choose_random_attacks(1)[0]
-		add_card(new_attack)
+		State.mana -= shuffle_deck_cost
+		var cards_to_keep = []
+		for c in cards_held:
+			if c.deck or c.skip:
+				cards_to_keep.append(c)
+			else:
+				State.gm.add_to_discard_pile(c.attack_data)
+				c.queue_free()
+		cards_held.clear()
+		cards_held = cards_to_keep
+		
+		
+		var new_attacks = State.gm.choose_random_attacks(max_hand_size - 2)
+		for new_attack in new_attacks:
+			add_card(new_attack)
+
+		
+		order_cards()
+
 		return
 	if card.skip:
+		if allowed_input != null and allowed_input != "skip_turn":
+			return
 		Messenger.skip_turn.emit()
 		return
 	
-	print("Attack pressed")
+	
+	if allowed_input != null and allowed_input != "use_card":
+		return
+
 	var index = cards_held.find(card)
 	if card.attack_data.mana_cost > State.mana:
-		print("Not enough mana")
 		return
 	State.mana -= card.attack_data.mana_cost
-	var new_index_for_focus = index - 1
-	if new_index_for_focus < 0:
-		new_index_for_focus = 0
-	focus_card(new_index_for_focus)
 	cards_held.erase(card)
 	cards_held = cards_held
 	card.queue_free()
@@ -126,7 +151,7 @@ func focus_card_direction(direction: int):
 	else:
 		var index = cards_held.find(focused_card)
 		var has_tool_tip = false
-		if focused_card:
+		if is_instance_valid(focused_card):
 			has_tool_tip = focused_card.tool_tipped
 		focus_card(index + direction)
 		if has_tool_tip:
@@ -183,7 +208,6 @@ func _on_blacksmith_opened(open, anvil):
 
 func _on_running_turns(v):
 	_on_disable_inventory(v)
-	print("Running turns: ", v)
 	# if not v and not used_hover:
 	# 	focused_card = cards_held[last_hovered]
 	# 	focused_card.focus = true
@@ -191,9 +215,9 @@ func _on_running_turns(v):
 
 func _on_end_of_turn():
 	_on_disable_inventory(false)
-	# if cards_held.size() < max_hand_size:
-	# 	var new_attack = State.gm.choose_random_attacks(1)[0]
-	# 	add_card(new_attack)
+	if cards_held.size() < max_hand_size:
+		var new_attack = State.gm.choose_random_attacks(1)[0]
+		add_card(new_attack)
 
 func _on_disable_inventory(f):
 	disabled = f
@@ -205,13 +229,16 @@ func _on_death():
 	hide()
 	
 func _input(event: InputEvent) -> void:
+	if disabled:
+		return
 	if Input.is_action_just_pressed("inventory_left"):
 		focus_card_direction(-1)
 	elif Input.is_action_just_pressed("inventory_right"):
 		focus_card_direction(1)
 	elif Input.is_action_just_pressed("ui_accept"):
 		print("Accept")
-		_on_attack_pressed(focused_card)
+		if is_instance_valid(focused_card):
+			_on_attack_pressed(focused_card)
 
 func _on_attack_added_to_library(attack: Attack):
 	add_card(attack)

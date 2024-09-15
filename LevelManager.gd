@@ -40,19 +40,13 @@ func move_camera_away():
 	camera.global_position = Vector2(level_width + gap, 0)
 	await get_tree().create_timer(2.0).timeout
 
-	
-	if State.player != null:
-		State.player.hide()
-	if current_level != null:
-		current_level.hide()
-		State.free_previous_level(current_level)
-
 	camera.position_smoothing_enabled = false
 	camera.global_position = -Vector2(level_width + gap, 0)
 	$Map.global_position = -Vector2(level_width + gap, 0) 
 	$CanvasLayer.hide()
 	$Map.unlock_next_rooms()
 	$Map.disabled = false
+	current_level.hide()
 
 func load_level(room: Room):
 	var options = rooms[room.type]
@@ -76,8 +70,9 @@ func load_level(room: Room):
 	camera.global_position = Vector2.ZERO
 	await get_tree().create_timer(1.0).timeout
 
+	if is_instance_valid(current_level):
+		current_level.queue_free()
 	current_level = next_level
-	current_level.play()
 	next_level = null
 	camera.follow = true
 	

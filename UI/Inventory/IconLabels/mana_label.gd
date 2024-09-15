@@ -1,6 +1,6 @@
 @tool
 extends Node2D
-@export var show: bool = false: set = _set_show
+@export var show_label: bool = false: set = _set_show
 @export var mana_count: int = 0: set = _set_mana_count
 @export var use_current_mana = false
 var sprite_width = 2.0
@@ -12,7 +12,7 @@ var sprite_height = 4.0
 
 
 func _ready():
-	if show:
+	if show_label:
 		show_mana()
 	else:
 		hide_mana()
@@ -29,7 +29,6 @@ func _set_mana_count(v):
 		var tex = sprite.texture
 		sprite_width = tex.get_width()
 		sprite_height = tex.get_height()
-		print("Width %s, Height %s" % [sprite_width, sprite_height])
 
 		var mana_sprites = [sprite]
 		for i in mana_count - 1:
@@ -41,14 +40,13 @@ func _set_mana_count(v):
 			new_sprite.hide()
 		# center the sprites
 		var num_rows = ceil(float(mana_count) / float(cols))
-		print("count: %s - %s Num rows: %s" % [mana_count, cols, num_rows])
 		var y_mult = -1 if reversed else 1
 		if num_rows > 1:
 			var left = -((sprite_width + gap) * (cols - 1)) / 2
 			var y = 0
 			for i in range(mana_sprites.size()):
 				# every cols sprites move down
-				y = floor(i / cols)
+				y = floor(float(i) / float(cols))
 				mana_sprites[i].position.x = left + (i % cols) * (sprite_width + gap)
 				mana_sprites[i].position.y = y * (sprite_height + gap) * y_mult
 		else:
@@ -58,8 +56,8 @@ func _set_mana_count(v):
 				mana_sprites[i].position.y = 0
 
 func _set_show(v):
-	show = v
-	if show:
+	show_label = v
+	if show_label:
 		show_mana()
 	else:
 		hide_mana()

@@ -32,7 +32,7 @@ func setup_health():
 	health_bar.mana_count = health
 	health_bar.show_mana()
 
-func _on_health_change(v: int):
+func _on_health_change(_v: int):
 	if health_bar != null:
 		health_bar.mana_count = health
 		health_bar.update_count()
@@ -49,14 +49,14 @@ func _ready():
 	setup_health()
 
 
-func predict_turn(gm: GameManager) -> int:
+func predict_turn(game: GameManager) -> int:
 	if not spawned:
 		return -1
-	var player_cell = gm.player.cell
+	var player_cell = game.player.cell
 	var my_cell = cell
 	var direction = player_cell - my_cell
 	direction = sign(direction)
-	var distance = abs(my_cell - player_cell)
+	# var distance = abs(my_cell - player_cell)
 
 	if direction != facing: # player is not in line of sight
 		turn = {
@@ -65,7 +65,7 @@ func predict_turn(gm: GameManager) -> int:
 		return -1
 
 	if entity_state == EntityState.QUEUED_ATTACK:
-		if can_hit_entity(gm.player, attacks[0]):
+		if can_hit_entity(game.player, attacks[0]):
 			turn = {
 				"type": "AGGRO"
 			}
@@ -81,7 +81,7 @@ func predict_turn(gm: GameManager) -> int:
 			if name == "Skeleton":
 				print("Skeleton will: %s" % turn)
 			# 1 in 3 chance to aggro if can hit player
-			if can_hit_entity(gm.player, attacks[0]) and randi() % 3 == 0:
+			if can_hit_entity(game.player, attacks[0]) and randi() % 3 == 0:
 				turn = {
 					"type": "AGGRO"
 				}
@@ -112,7 +112,7 @@ func predict_turn(gm: GameManager) -> int:
 	return -1
 
 
-func run_turn(gm: GameManager):
+func run_turn(game: GameManager):
 	if not spawned:
 		spawned = true
 		return
@@ -123,12 +123,12 @@ func run_turn(gm: GameManager):
 		if entity_state == EntityState.RETREATING:
 			entity_state = EntityState.IDLE
 		var direction = turn["args"][0]
-		var can = gm.can_move(self, direction)
+		var can = game.can_move(self, direction)
 		if can:
-			gm.move(self, direction)
+			game.move(self, direction)
 			await get_tree().create_timer(0.5).timeout
 	elif turn["type"] == "TURNAROUND":
-		gm.turn_around(self)
+		game.turn_around(self)
 		await get_tree().create_timer(0.1).timeout
 	elif turn["type"] == "QUEUE_ATTACK":
 		add_to_attack_queue(attacks[0])
@@ -142,7 +142,7 @@ func run_turn(gm: GameManager):
 	turn = default_turn
 	_manage_animation_state()
 	return
-func _on_state_change(v: EntityState):
+func _on_state_change(_v: EntityState):
 	_manage_animation_state()
 	pass
 func _manage_animation_state():

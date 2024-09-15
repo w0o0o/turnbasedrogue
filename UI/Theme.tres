@@ -1,6 +1,38 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bi5ojquhrato2"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://bi5ojquhrato2"]
 
 [ext_resource type="Texture2D" uid="uid://bm1dkgy86vrrj" path="res://UI/GUI.aseprite" id="1_17fs0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_crnx4"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rn1uo"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3c7hl"]
+texture = ExtResource("1_17fs0")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+region_rect = Rect2(145, 65, 46, 14)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b7hhb"]
 texture = ExtResource("1_17fs0")
@@ -11,5 +43,9 @@ texture_margin_bottom = 6.0
 region_rect = Rect2(81, 97, 30, 30)
 
 [resource]
+Panel/styles/panel = SubResource("StyleBoxFlat_crnx4")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_rn1uo")
+SpeechBubble/base_type = &"PanelContainer"
+SpeechBubble/styles/panel = SubResource("StyleBoxTexture_3c7hl")
 ToolTip/base_type = &"Panel"
 ToolTip/styles/panel = SubResource("StyleBoxTexture_b7hhb")

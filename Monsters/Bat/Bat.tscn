@@ -27,8 +27,9 @@ attacks = Array[ExtResource("2_5lm6c")]([SubResource("Resource_hilru")])
 modulate = Color(0.427493, 0.427493, 0.427493, 1)
 texture_filter = 1
 sprite_frames = ExtResource("2_pmyvn")
-animation = &"idle"
-frame_progress = 0.543001
+animation = &"attack_1"
+frame = 7
+frame_progress = 1.0
 offset = Vector2(1, -20)
 
 [node name="health_pos" type="Marker2D" parent="."]

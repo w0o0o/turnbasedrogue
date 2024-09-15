@@ -26,13 +26,13 @@ func _on_move_finished():
 	if entity_state == EntityState.IDLE:
 		$AnimatedSprite2D.play("idle")
 
-func _on_damage(damage: int):
+func _on_damage(_damage_amount: int):
 	await wait_for_animation($AnimatedSprite2D, "hit")
 	$AnimatedSprite2D.play("idle")
 
 
-func _on_attack(attack):
+func _on_attack(_attack):
 	var rand = (randi() % 2) + 1
-	var duration = get_animation_duration($AnimatedSprite2D, "attack_%s" % rand) # attack_0 or attack_1
+	var duration = get_animation_duration($AnimatedSprite2D, "attack_1")
 	await wait_for_animation($AnimatedSprite2D, "attack_%s" % rand, 0.35) # 35% of the animation duration
 	return duration * 0.65 # 65% of the animation duration

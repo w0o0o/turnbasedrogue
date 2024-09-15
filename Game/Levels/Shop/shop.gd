@@ -4,11 +4,6 @@ var selected_box = 0
 var moving = false
 var closed = true
 
-func play() -> void:
-	await select_box(selected_box)
-	closed = false
-	Messenger.level_started.emit()
-
 func select_box(box):
 	var boxcount = $Items.get_child_count()
 	if box < 0:
@@ -44,6 +39,10 @@ func start(level, boss_battle = false):
 		await get_tree().create_timer(0.1).timeout
 		var item = $Items.get_child(i)
 		item.open(attacks[i])
+	
+	await select_box(selected_box)
+	closed = false
+	Messenger.level_started.emit()
 	pass
 
 

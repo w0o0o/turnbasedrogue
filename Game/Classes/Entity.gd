@@ -23,11 +23,10 @@ var facing: int = 1:
 		facing = v
 var health: int = 4: set = health_change
 func health_change(v: int):
-	print("HEALTH changed to: %s" % v)
 	health = v
 	_on_health_change(v)
 
-func _on_health_change(v: int):
+func _on_health_change(_v: int):
 	pass
 
 var default_turn = {
@@ -49,7 +48,8 @@ var entity_state: EntityState = EntityState.IDLE: set = state_change
 func state_change(v: EntityState):
 	entity_state = v
 	_on_state_change(v)
-func _on_state_change(v):
+
+func _on_state_change(_v):
 	pass
 
 
@@ -68,29 +68,29 @@ func play_sound(sound: AudioStream):
 
 var attack_queue = []
 
-func handle_move_into_enemy(cells: Array[Entity], direction: int, enemy: Entity) -> Array[Entity]:
+func handle_move_into_enemy(cells: Array[Entity], _direction: int, _enemy: Entity) -> Array[Entity]:
 	# default implementation for entities is to return the cells array unchanged
 	return cells
-func predict_turn(gm: GameManager) -> int:
-	return 10
-	pass
 
-func run_turn(gm: GameManager):
+func predict_turn(_game: GameManager) -> int:
+	return 10
+
+func run_turn(_game: GameManager):
 	pass
 
 func _on_death():
 	pass
 
-func damage(damage: int) -> bool:
+func damage(damage_amount: int) -> bool:
 	sound_player.stream = punch_sound
 	sound_player.play()
-	health -= damage
-	DamageNumbers.display_number(damage, position, false)
+	health -= damage_amount
+	DamageNumbers.display_number(damage_amount, position, false)
 	if health <= 0:
 		_on_death()
 		return true
 	else:
-		_on_damage(damage)
+		_on_damage(damage_amount)
 	return false
 
 func handle_change_cell(before: int, after: int):
@@ -122,17 +122,17 @@ func handle_change_cell(before: int, after: int):
 		await get_tree().create_timer(0.2).timeout
 		_on_move_finished()
 
-func _on_move(direction: int):
+func _on_move(_direction: int):
 	pass
 
 func _on_move_finished():
 	pass
 
-func _on_damage(damage: int):
+func _on_damage(_damage: int):
 	pass
 		
 
-func handle_change_direction(before: int, after: int):
+func handle_change_direction(_before: int, after: int):
 	var tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(self, "scale:x", after, 0.2)
 	tween.parallel()
@@ -176,13 +176,29 @@ func can_hit_entity(entity: Entity, attack: Attack) -> bool:
 				will_hit = true
 				break
 			test_cell -= direction
+
+	if attack.ramming:
+		var test_cell = cell + direction
+		while test_cell < gm.numCells and test_cell >= 0:
+			if test_cell == entity.cell:
+				will_hit = true
+				break
+			test_cell += direction
+		var cell_for_self = (direction * (abs(cell - test_cell) - 1))
+		var resulting_cell = cell + cell_for_self
+		test_cell = resulting_cell + direction
+		while test_cell < gm.numCells and test_cell >= 0:
+			if test_cell == entity.cell:
+				will_hit = true
+				break
+			test_cell += direction
 	return will_hit
 
 func execute_attack(attack: Attack):
 	if attack == null:
 		return
 	var after_attack_delay = await _on_attack(attack)
-	var damage = attack.damage
+	var damage_amount = attack.damage
 	if attack.damage_cells.size() > 0:
 		var damage_cells = attack.damage_cells # will be -1 -2, 1, 2 (relative to the attacker) but it is an array
 		for dc in damage_cells:
@@ -191,7 +207,7 @@ func execute_attack(attack: Attack):
 				continue
 			var target = gm.cells[target_cell]
 			if target != null:
-				gm.damage_entity(target, damage)
+				gm.damage_entity(target, damage_amount)
 	var direction = attack.direction * facing
 	if direction == 0:
 		direction = facing # if the attack has no direction, it is the same as the facing direction (prevent infinite loop)
@@ -202,7 +218,7 @@ func execute_attack(attack: Attack):
 		while test_cell < gm.numCells and test_cell >= 0:
 			var target = gm.cells[test_cell]
 			if target != null:
-				gm.damage_entity(target, damage)
+				gm.damage_entity(target, damage_amount)
 				piercing -= 1
 				if piercing <= 0:
 					break # no piercing left
@@ -215,7 +231,7 @@ func execute_attack(attack: Attack):
 		while test_cell != cell:
 			var target = gm.cells[test_cell]
 			if target != null:
-				gm.damage_entity(target, damage)
+				gm.damage_entity(target, damage_amount)
 				piercing -= 1
 				if piercing <= 0:
 					break # no piercing left
@@ -228,9 +244,9 @@ func execute_attack(attack: Attack):
 			if target != null:
 				break
 			test_cell += direction
-		var cell_for_player = (direction * (abs(cell - test_cell) - 1))
+		var cell_for_self = (direction * (abs(cell - test_cell) - 1))
 
-		var resulting_cell = cell + cell_for_player
+		var resulting_cell = cell + cell_for_self
 		test_cell = resulting_cell + direction
 		var piercing = attack.piercing
 		var enemies_hit = []
@@ -242,13 +258,14 @@ func execute_attack(attack: Attack):
 				if piercing <= 0:
 					break # no piercing left
 			test_cell += direction
-		gm.move(self, cell_for_player)
+		gm.move(self, cell_for_self)
 		await get_tree().create_timer(0.2).timeout
 		for enemy in enemies_hit:
-			gm.damage_entity(enemy, damage)
+			gm.damage_entity(enemy, damage_amount)
 	await get_tree().create_timer(after_attack_delay).timeout
 
-func _on_attack(attack) -> float:
+func _on_attack(_attack) -> float:
+	await get_tree().create_timer(0.0).timeout
 	return 0.0
 
 func _on_end_of_turn():

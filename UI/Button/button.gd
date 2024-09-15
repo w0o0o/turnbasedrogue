@@ -32,6 +32,5 @@ func _on_focus_entered() -> void:
 
 func _on_visibility_changed() -> void:
 	if visible and auto_focus:
-		print("Auto focusing")
 		grab_focus()
 		hover()

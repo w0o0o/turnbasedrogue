@@ -3,14 +3,6 @@ extends Node2D
 var moving = false
 var closed = true
 
-func play() -> void:
-	moving = true
-	await $ShopCat.move($CatEnter.global_position)
-	moving = false
-	closed = false
-	Messenger.blacksmith_opened.emit(true, $Anvil)
-	Messenger.level_started.emit()
-
 func _input(event: InputEvent) -> void:
 	if moving or closed:
 		return
@@ -34,6 +26,12 @@ func _on_blacksmith_item_selected(attack_data:Attack) -> void:
 func start(level, boss_battle = false):
 	Messenger.blacksmith_item_selected.connect(_on_blacksmith_item_selected)
 	Messenger.skip_turn.connect(close_shop)
-	pass
+	moving = true
+	await $ShopCat.move($CatEnter.global_position)
+	moving = false
+	closed = false
+	Messenger.blacksmith_opened.emit(true, $Anvil)
+	Messenger.level_started.emit()
+
 
 var dup = null
