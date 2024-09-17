@@ -14,6 +14,7 @@ animation = "Attack_Both_1"
 damage_cells = Array[int]([-1, 1])
 damage = 3
 mana_cost = 2
+cooldown = 3
 projectile = false
 piercing = 0
 reverse = false
@@ -28,6 +29,8 @@ attacks = Array[ExtResource("2_uq5ev")]([SubResource("Resource_ihskr")])
 texture_filter = 1
 sprite_frames = ExtResource("1_clcq8")
 animation = &"attack_1"
+frame = 7
+frame_progress = 1.0
 offset = Vector2(1, -25)
 
 [node name="Blood" type="AnimatedSprite2D" parent="AnimatedSprite2D"]

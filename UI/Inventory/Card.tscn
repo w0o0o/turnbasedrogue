@@ -1,15 +1,14 @@
-[gd_scene load_steps=15 format=3 uid="uid://cs57ndiljnd40"]
+[gd_scene load_steps=14 format=3 uid="uid://cs57ndiljnd40"]
 
 [ext_resource type="Script" path="res://UI/Inventory/card.gd" id="1_3obcm"]
 [ext_resource type="Texture2D" uid="uid://be54y04enc1y5" path="res://UI/Inventory/Assets/cardbase.aseprite" id="1_v34h4"]
 [ext_resource type="Texture2D" uid="uid://baudmyxtargry" path="res://UI/Inventory/Assets/cardback.aseprite" id="2_04oe5"]
 [ext_resource type="FontFile" uid="uid://spn4ve4oisi6" path="res://Fonts/TripleN.ttf" id="3_qtix5"]
 [ext_resource type="PackedScene" uid="uid://uhs2dwlyln7x" path="res://UI/ToolTip/Tooltip.tscn" id="5_l1vop"]
-[ext_resource type="PackedScene" uid="uid://dbhoaw1gx7rmc" path="res://UI/Inventory/IconLabels/ManaLabel.tscn" id="5_yhnjd"]
 [ext_resource type="Texture2D" uid="uid://dwoow2i08hjm2" path="res://UI/Assets/attack_sprites.png" id="6_rymyj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ewehv"]
-size = Vector2(16, 41)
+size = Vector2(16, 21)
 
 [sub_resource type="LabelSettings" id="LabelSettings_b0old"]
 font = ExtResource("3_qtix5")
@@ -55,46 +54,34 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Cardbase/ManaLabel:position")
+tracks/3/path = NodePath("Cardbase:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-0.5, 0)]
+"values": [Vector2(1, 1)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Cardbase:scale")
+tracks/4/path = NodePath("Cardbase:texture")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
+"update": 1,
+"values": [ExtResource("2_04oe5")]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Cardbase:texture")
+tracks/5/path = NodePath("Cardbase/WeaponIcon:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_04oe5")]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Cardbase/WeaponIcon:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -114,7 +101,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0.5, 0), Vector2(0.5, -8)]
+"values": [Vector2(0.5, 0), Vector2(0.5, -4)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -139,18 +126,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Cardbase/ManaLabel:position")
-tracks/3/interp = 2
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-0.5, 0), Vector2(-0.5, 14)]
 }
 
 [sub_resource type="Animation" id="Animation_xbf8f"]
@@ -191,10 +166,10 @@ tracks/1/path = NodePath("Cardbase:texture")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.133333),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.125, 0.133333, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("2_04oe5"), ExtResource("1_v34h4")]
+"values": [ExtResource("2_04oe5"), ExtResource("2_04oe5"), ExtResource("1_v34h4"), ExtResource("1_v34h4")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -203,10 +178,10 @@ tracks/2/path = NodePath("Cardbase/WeaponIcon:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.133333),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.125, 0.133333),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [false, true]
+"values": [false, false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l1bl5"]
@@ -229,8 +204,7 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cardbase/Area2D"]
-visible = false
-position = Vector2(-0.5, 9.5)
+position = Vector2(-0.5, -0.5)
 shape = SubResource("RectangleShape2D_ewehv")
 
 [node name="Label" type="Label" parent="Cardbase"]
@@ -255,12 +229,6 @@ horizontal_alignment = 1
 
 [node name="Tooltip" parent="Cardbase" instance=ExtResource("5_l1vop")]
 position = Vector2(0, -11)
-
-[node name="ManaLabel" parent="Cardbase" instance=ExtResource("5_yhnjd")]
-unique_name_in_owner = true
-show_behind_parent = true
-position = Vector2(-0.5, 0)
-use_current_mana = true
 
 [node name="WeaponIcon" type="Sprite2D" parent="Cardbase"]
 visible = false

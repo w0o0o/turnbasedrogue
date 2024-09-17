@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b7xev4ihe5frv"]
+[gd_scene load_steps=17 format=3 uid="uid://b7xev4ihe5frv"]
 
 [ext_resource type="Script" path="res://LevelManager.gd" id="1_mfhm3"]
 [ext_resource type="PackedScene" uid="uid://0uyohng78otv" path="res://UI/Health.tscn" id="2_1doc7"]
@@ -14,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://d12bkjxsqle8g" path="res://UI/Assets/Inputs/KEYBOARD/KEY_UP_ALT.PNG" id="7_i6thg"]
 [ext_resource type="AudioStream" uid="uid://b7axuigt7cxl3" path="res://sfx/night-ambience-17064.mp3" id="14_2vjva"]
 [ext_resource type="PackedScene" uid="uid://c5les0joxb36f" path="res://UI/HUD/HUD.tscn" id="14_kikfi"]
-[ext_resource type="AudioStream" uid="uid://bksmrbvjk7k8y" path="res://sfx/Mystical Forest.mp3" id="17_c5c6d"]
 [ext_resource type="PackedScene" uid="uid://bi7hr8oybtww3" path="res://Game/MapGen/Map.tscn" id="18_h7w7t"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_wckbj"]
@@ -184,7 +183,6 @@ volume_db = -9.882
 autoplay = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("17_c5c6d")
 volume_db = -32.444
 autoplay = true
 

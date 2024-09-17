@@ -12,7 +12,7 @@ var killed_enemies = 0
 var mana = 5: set = _on_mana_change
 var main = null
 
-var play_tutorial = true
+var play_tutorial = false
 
 func _on_mana_change(v: int):
 	mana = v
@@ -57,8 +57,8 @@ func setup(difficulty = 0, boss_battle = false):
 		tutorial = Tutorial.new()
 
 func player_ready():
-	# if play_tutorial:
-	# 	tutorial.start_tutorial()
+	if play_tutorial:
+		tutorial.start_tutorial()
 	pass
 
 

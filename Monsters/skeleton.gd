@@ -22,8 +22,7 @@ func _on_death():
 
 
 func _on_move(_direction: int):
-	if entity_state == EntityState.IDLE:
-		$AnimatedSprite2D.play("walk")
+	$AnimatedSprite2D.play("walk")
 
 
 func _on_move_finished():

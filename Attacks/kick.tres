@@ -11,6 +11,7 @@ animation = "Attack_Front_Kick"
 damage_cells = Array[int]([1])
 damage = 1
 mana_cost = 1
+cooldown = 3
 projectile = false
 piercing = 0
 reverse = false

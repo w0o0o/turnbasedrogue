@@ -5,10 +5,13 @@
 [resource]
 script = ExtResource("1_uxe1v")
 name = "Ram"
+icon_frame = 0
+description = ""
 animation = "Attack_Front_Kick"
 damage_cells = Array[int]([])
-damage = 10
+damage = 2
 mana_cost = 4
+cooldown = 3
 projectile = false
 piercing = 0
 reverse = false

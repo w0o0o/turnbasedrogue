@@ -67,6 +67,7 @@ func _ready() -> void:
 	set_cat_frames(cat_frames)
 	Messenger.health_updated.emit(health)
 	Messenger.attack_selected.connect(_on_attack_selected)
+	Messenger.reorder_queue.connect(_on_queue_reordered)
 	await get_tree().create_timer(0.1).timeout
 	Messenger.health_updated.emit(health)
 	Messenger.skip_turn.connect(_on_skip_turn)
@@ -158,6 +159,9 @@ func _on_attack_selected(attack):
 		return
 	attack_queue.append(attack)
 	entity_state = EntityState.QUEUED_ATTACK
+
+func _on_queue_reordered(queue):
+	attack_queue = queue
 
 func add_attack_to_library(attack: Attack):
 	Messenger.attack_added_to_library.emit(attack)

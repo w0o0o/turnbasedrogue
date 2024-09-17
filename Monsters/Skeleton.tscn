@@ -13,8 +13,8 @@ attacks = Array[ExtResource("2_hnobf")]([ExtResource("3_mwand")])
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = ExtResource("2_w7wi6")
-animation = &"idle"
-frame_progress = 0.544635
+animation = &"walk"
+frame_progress = 0.649178
 offset = Vector2(7, -19)
 
 [node name="Blood" type="AnimatedSprite2D" parent="AnimatedSprite2D"]

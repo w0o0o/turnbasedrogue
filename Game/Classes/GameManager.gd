@@ -85,19 +85,23 @@ func add_to_discard_pile(attack: Attack):
 
 var available_library = []
 
-func fill_discard_pile():
+func fill_attack_list():
 	for attack in attack_library.keys():
 		available_library.append(attack)
 	pass
 
 func reset_discard_pile():
 	var new_pile = []
+	if discard_pile.size() == 0:
+		fill_attack_list()
+		return available_library
 	for attack in discard_pile:
 		new_pile.append(attack)
 	discard_pile.clear()
 	new_pile.shuffle()
 	return new_pile
 func choose_random_attacks(amount: int) -> Array:
+	load_all_attacks("res://Attacks/")
 	var attacks = []
 	if test_attack != null:
 		for i in amount:
@@ -135,7 +139,7 @@ func place_cells(cell_scene, cp) -> void:
 
 
 func cleanup():
-	fill_discard_pile()
+	fill_attack_list()
 	turns = 0
 	cells.clear()
 	for enemy in enemies:
@@ -158,7 +162,7 @@ func randomize_level():
 		enemies_target = randi_range(2, 4 + difficulty)
 		numCells = randi_range(5, 5 + difficulty)
 		print("Num cells: " + str(numCells))
-		max_enemies = min(numCells - 2, randi_range(2, 4 + difficulty))
+		max_enemies = randi_range(3, 4 + difficulty)
 
 
 func setup(p, l, cell_scene, cells_parent):
@@ -361,7 +365,7 @@ func spawn_enemy():
 	var enemy = enem.instantiate()
 	enemy.gm = self
 	if boss_battle:
-		enemy.health = 10 + difficulty
+		enemy.health = 20 + difficulty
 	else:
 		enemy.health = enemy.health + randi_range(0, 2 + difficulty)
 	place_enemy(enemy)
@@ -375,7 +379,7 @@ func handle_moves_updated(moves):
 		return
 	if enemies.size() + killed_enemies >= enemies_target:
 		return
-	if moves % 5 == 0:
+	if moves % 3 == 0:
 		spawn_enemy()
 
 func win_check():

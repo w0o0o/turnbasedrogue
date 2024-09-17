@@ -10,6 +10,7 @@ class_name Attack
 @export var damage_cells: Array[int] = []
 @export var damage: int = 0
 @export var mana_cost: int = 1
+@export var cooldown: int = 3
 @export var projectile: bool = false
 @export var piercing: int = 0
 @export var reverse: bool = false # attack hits the last enemy first (in the direction of the attack)

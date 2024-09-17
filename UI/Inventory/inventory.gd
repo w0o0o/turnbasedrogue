@@ -4,7 +4,8 @@ extends Node2D
 var disabled = false
 var blacksmithing = false
 
-var cards_held = []: set = set_cards_held
+var cards_held = []
+var cards_queued = []
 var card_width = 18
 var gap = 2
 var max_hand_size = 5 # 2 of which are the deck and skip
@@ -21,13 +22,32 @@ func _ready() -> void:
 	Messenger.blacksmith_opened.connect(_on_blacksmith_opened)
 	Messenger.running_turns.connect(_on_running_turns)
 	Messenger.end_of_turn.connect(_on_end_of_turn)
+	Messenger.level_started.connect(started)
+	Messenger.attacks_executed.connect(_on_attacks_executed)
 	var test: Attack = Attack.new()
 	test.name = "Test"
 	test.damage = 1
 	place_deck()
 	place_skip()
 	Messenger.force_tutorial_input.connect(_on_force_tutorial_input)
+	# await get_t ree().create_timer(0.1).timeout
+	# started()
 
+func _on_attacks_executed(a):
+	print("Attacks executed")
+	for card in cards_held:
+		if card.selected:
+			card.cooldown = card.attack_data.cooldown
+			card.selected = false
+	order_cards()
+
+
+func started():
+	if cards_held.size() >= 5:
+		return
+	var new_attacks = State.gm.choose_random_attacks(3)
+	for new_attack in new_attacks:
+		add_card(new_attack)
 var allowed_input
 func _on_force_tutorial_input(input_name):
 	if input_name == "":
@@ -35,12 +55,6 @@ func _on_force_tutorial_input(input_name):
 	else:
 		allowed_input = input_name
 
-func set_cards_held(new_value):
-	cards_held = new_value
-	if cards_held.size() >= max_hand_size:
-		deck.modulate = Color(1, 1, 1, 0.5)
-	else:
-		deck.modulate = Color(1, 1, 1, 1)
 
 var deck = null
 var skip = null
@@ -70,11 +84,24 @@ func add_card(attack: Attack):
 	card.attack_data = attack
 	add_child(card)
 	card.pressed.connect(_on_attack_pressed)
+	card.dragged.connect(_on_attack_dragged)
 	card.position = deck.position
 	cards_held.insert(1, card)
 	cards_held = cards_held
 	order_cards()
 
+func _on_attack_dragged(card: Card, direction: int):
+	if dragging:
+		return
+	dragging = true
+	if allowed_input != null and allowed_input != "move_card":
+		dragging = false
+		return
+	print("SIGNAL RECEIVED - MOVE CARD DIRECTION %s" % str(direction))
+	print("SIGNAL RECEIVED - MOVE CARD ", card.name)
+	move_card_in_hand(direction, card)
+	await get_tree().create_timer(0.1).timeout
+	dragging = false
 
 func _on_attack_pressed(card: Card) -> void:
 	if not card:
@@ -86,6 +113,7 @@ func _on_attack_pressed(card: Card) -> void:
 	if disabled:
 		return
 	if card.deck:
+		return
 		if allowed_input != null and allowed_input != "draw_card":
 			return
 
@@ -118,18 +146,30 @@ func _on_attack_pressed(card: Card) -> void:
 		Messenger.skip_turn.emit()
 		return
 	
-	
 	if allowed_input != null and allowed_input != "use_card":
 		return
 
-	var index = cards_held.find(card)
-	if card.attack_data.mana_cost > State.mana:
-		return
-	State.mana -= card.attack_data.mana_cost
-	cards_held.erase(card)
-	cards_held = cards_held
-	card.queue_free()
-	Messenger.attack_selected.emit(card.attack_data)
+	if card.selected:
+		var cards_selected = 0
+		for c in cards_held:
+			if c.selected:
+				cards_selected += 1
+				
+		card.selected = false
+		cards_held.erase(card)
+		cards_held.insert(cards_selected + 1, card)
+	else:
+		# move this card to the back of the queue
+		var cards_selected = 0
+		for c in cards_held:
+			if c.selected:
+				cards_selected += 1
+				
+		card.selected = true
+		cards_held.erase(card)
+		cards_held.insert(cards_selected + 1, card)
+
+		Messenger.attack_selected.emit(card.attack_data)
 	order_cards()
 	
 
@@ -159,6 +199,7 @@ func focus_card_direction(direction: int):
 	await get_tree().create_timer(0.05).timeout
 	debounce = false
 
+
 func focus_card(index: int):
 	if index < 0 or index >= cards_held.size():
 		# wrap around
@@ -173,7 +214,9 @@ func focus_card(index: int):
 	last_hovered = index
 
 func order_cards():
+	handle_queue()
 	var new_array = [deck]
+	var y = deck.position.y
 	cards_held.erase(deck)
 	cards_held.erase(skip)
 	new_array.append_array(cards_held)
@@ -184,21 +227,17 @@ func order_cards():
 	for card in cards_held:
 		i += 1
 		var tweener = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-		tweener.tween_property(card, "position:x", left, 0.2).set_delay(i * 0.05)
+		var offset = -20 if card.selected else 0
+		var pos = Vector2(left, y + offset)
+		tweener.tween_property(card, "position", pos, 0.2).set_delay(i * 0.05)
 		left += card_width + gap
 
 	var tweener_left = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	var tweener_right = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-	# $LeftPrompt.position.x = cards_held[0].position.x - ((card_width + gap) * 1.5)
-	# $LeftPrompt.position.y = cards_held[0].position.y
-	# $RightPrompt.position.x = cards_held[cards_held.size() - 1].position.x + ((card_width + gap) * 1.5)
-	# $RightPrompt.position.y = cards_held[cards_held.size() - 1].position.y
-
 	var new_pos_L = Vector2(-((card_width + gap) / 2) * (cards_held.size() - 1) - (card_width + gap), cards_held[0].position.y + 5)
 	var new_pos_R = Vector2(left, cards_held[cards_held.size() - 1].position.y + 5)
 	tweener_left.tween_property($LeftPrompt, "position", new_pos_L, 0.2)
 	tweener_right.tween_property($RightPrompt, "position", new_pos_R, 0.2)
-
 
 func _on_blacksmith_opened(open, anvil):
 	blacksmithing = open
@@ -208,9 +247,9 @@ func _on_blacksmith_opened(open, anvil):
 
 func _on_running_turns(v):
 	_on_disable_inventory(v)
-	# if not v and not used_hover:
-	# 	focused_card = cards_held[last_hovered]
-	# 	focused_card.focus = true
+	if not v and not used_hover:
+		focused_card = cards_held[last_hovered]
+		focused_card.focus = true
 
 
 func _on_end_of_turn():
@@ -227,18 +266,55 @@ func _on_death():
 	for child in get_children():
 		child.queue_free()
 	hide()
-	
+
+var dragging = false
+var dragged = false	
+
+func handle_queue():
+	var queue = []
+	cards_held = cards_held.filter(func (c): return c != null)
+	for c in cards_held:
+		if c.selected:
+			queue.append(c.attack_data)
+	Messenger.reorder_queue.emit(queue)
+
+func move_card_in_hand(direction: int, card = null):
+	if card == null:
+		card = focused_card
+	if dragging:
+		var index = cards_held.find(card)
+		var new_index = index + direction
+		new_index = clamp(new_index, 0, cards_held.size() - 1)
+		cards_held.erase(card)
+		cards_held.insert(new_index, card)
+		order_cards()
+
 func _input(event: InputEvent) -> void:
 	if disabled:
 		return
 	if Input.is_action_just_pressed("inventory_left"):
-		focus_card_direction(-1)
+		if not dragging:
+			focus_card_direction(-1)
+		else:
+			dragged = true
+			move_card_in_hand(-1)
 	elif Input.is_action_just_pressed("inventory_right"):
-		focus_card_direction(1)
+		if not dragging:
+			focus_card_direction(1)
+		else:
+			dragged = true
+			move_card_in_hand(1)
 	elif Input.is_action_just_pressed("ui_accept"):
-		print("Accept")
-		if is_instance_valid(focused_card):
-			_on_attack_pressed(focused_card)
+		dragging = true
+	elif Input.is_action_pressed("ui_accept"):
+		print("Accept held")
+	elif Input.is_action_just_released("ui_accept"):
+		print("Accept released: ", dragging)
+		if not dragged:
+			if is_instance_valid(focused_card):
+				_on_attack_pressed(focused_card)
+		dragging = false
+		dragged = false
 
 func _on_attack_added_to_library(attack: Attack):
 	add_card(attack)

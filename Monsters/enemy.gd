@@ -5,7 +5,7 @@ class_name Enemy
 		# turn = {
 		# 	"type": "ATTACK"
 		# }
-var spawned = false
+var spawned = true
 var aggro_icon: Sprite2D = null
 var attack_icon: Sprite2D = null
 var prediction_priority = 0
