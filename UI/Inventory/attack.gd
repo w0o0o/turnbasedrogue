@@ -34,10 +34,8 @@ func _input(event: InputEvent) -> void:
 	if not focussed:
 		return
 	if Input.is_action_just_pressed("move_queued_left"):
-		print("Move left")
 		get_parent().move_attack(self, -1)
 	if Input.is_action_just_pressed("move_queued_right"):
-		print("Move right")
 		get_parent().move_attack(self, 1)
 
 func _on_focus_exited() -> void:

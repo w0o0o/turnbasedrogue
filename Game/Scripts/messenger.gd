@@ -24,4 +24,5 @@ signal speech_bubble(text: String, pos: Vector2, duration: float, input_action: 
 signal speech_bubble_hidden()
 signal shake_camera(strength: float, duration: float)
 signal attack_upgraded(attack: Attack)
-signal reorder_queue(queue: Array)
+signal drop_item(item)
+signal reorder_queue(queue: Array[Attack])

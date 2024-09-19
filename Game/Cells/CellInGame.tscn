@@ -1,9 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://dvt2pqucd2mqx"]
+[gd_scene load_steps=7 format=3 uid="uid://dvt2pqucd2mqx"]
 
 [ext_resource type="Script" path="res://Game/Cells/cell_in_game.gd" id="1_5l001"]
 [ext_resource type="SpriteFrames" uid="uid://dh3qonr5lkvug" path="res://Effects/Explosion03.aseprite" id="2_egl51"]
 [ext_resource type="Texture2D" uid="uid://b35whvs5jidh5" path="res://Game/Cells/cellSprite_Dark.png" id="3_pl42o"]
 [ext_resource type="Texture2D" uid="uid://cjesyxo83yhhu" path="res://Game/Cells/cellSprite_Light.png" id="4_fuley"]
+
+[sub_resource type="Gradient" id="Gradient_6ehgi"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jctua"]
+gradient = SubResource("Gradient_6ehgi")
+width = 16
+fill = 1
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
 
 [node name="CellInGame" type="Node2D"]
 z_index = 10
@@ -27,5 +38,10 @@ visible = false
 texture_filter = 1
 position = Vector2(0, 3)
 texture = ExtResource("4_fuley")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+color = Color(0.490196, 1, 0.137255, 1)
+texture = SubResource("GradientTexture2D_jctua")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

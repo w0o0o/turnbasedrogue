@@ -37,7 +37,7 @@ func _on_attack(attack: Attack):
 		rolling = true
 		var duration = get_animation_duration($AnimatedSprite2D, "roll")
 		await wait_for_animation($AnimatedSprite2D, "roll", 0.35) # 35% of the animation duration
-		return duration * 0.35 # 65% of the animation duration
+		return duration * 0.65 # 65% of the animation duration
 	else:
 		var duration = get_animation_duration($AnimatedSprite2D, "attack")
 		await wait_for_animation($AnimatedSprite2D, "attack", 0.35) # 35% of the animation duration
@@ -45,6 +45,13 @@ func _on_attack(attack: Attack):
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:
-	rolling = false
-	$AnimatedSprite2D.play("stop_roll")
+	pass # Replace with function body.
+
+
+func _on_animated_sprite_2d_animation_changed() -> void:
+	if rolling:
+		var duration = get_animation_duration($AnimatedSprite2D, "roll")
+		await get_tree().create_timer(0.35).timeout
+		rolling = false
+		$AnimatedSprite2D.play("stop_roll")
 	pass # Replace with function body.

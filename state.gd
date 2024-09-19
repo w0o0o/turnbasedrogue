@@ -6,7 +6,8 @@ var level = null: set = _set_level
 var cell_scene = null
 var cells = null
 var gm: GameManager = null
-var selected_cat = 0
+var selected_cat = 1
+var default_health = 100
 var health = 9
 var killed_enemies = 0
 var mana = 5: set = _on_mana_change
@@ -34,12 +35,8 @@ func _ready() -> void:
 	gm = GameManager.new()
 	mana = 5
 	killed_enemies = 0
-	health = 9
+	health = default_health
 	cells = null
-	Messenger.end_of_turn.connect(_on_end_of_turn)
-
-func _on_end_of_turn():
-	mana += 1
 
 func setup(difficulty = 0, boss_battle = false):
 	mana = max(5, mana)

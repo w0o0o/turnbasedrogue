@@ -93,7 +93,7 @@ func _on_attack_pressed(card: Card) -> void:
 
 func queue_manager():
 	var count = 0
-	var selected_cards = []
+	var selected_cards:Array[Attack] = []
 	for card in cards_held:
 		if card.selected:
 			count += 1

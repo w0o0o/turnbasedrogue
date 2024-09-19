@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://c4uuff4steijn"]
+
+[ext_resource type="Script" path="res://Items/ItemData.gd" id="1_uf6bo"]
+
+[resource]
+script = ExtResource("1_uf6bo")
+name = "HealthPotion"
+description = ""
+icon_frame = 7
+tint = Color(0.596233, 0.155436, 0.255165, 1)
+type = "CONSUMABLE"

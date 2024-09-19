@@ -21,6 +21,7 @@ func set_cat_frames(frames: SpriteFrames):
 		if v < 0:
 			v = cat_options.size() - 1
 		cat_frames = cat_options[v]
+		special_ability_cool_down_max = 4
 
 @export var cat_options: Array[SpriteFrames]
 
@@ -105,10 +106,8 @@ func _input(_event: InputEvent) -> void:
 	if gm.running_turns:
 		return
 	if Input.is_action_just_pressed('move_left'):
-		print("Move left pressed _____________ %s" % allowed_input)
 		if allowed_input != null and allowed_input != "move_left":
 			return
-		print("Move left")
 		var can = gm.can_move(self, -1)
 		if can:
 			turn = {
@@ -116,6 +115,8 @@ func _input(_event: InputEvent) -> void:
 				"args": [-1]
 			}
 			gm.run_next_turn()
+		else:
+			Messenger.shake_camera.emit(1, 0.2)
 	elif Input.is_action_just_pressed('move_right'):
 		if allowed_input != null and allowed_input != "move_right":
 			return
@@ -161,7 +162,7 @@ func _on_attack_selected(attack):
 	attack_queue.append(attack)
 	entity_state = EntityState.QUEUED_ATTACK
 
-func _on_queue_reordered(queue):
+func _on_queue_reordered(queue: Array[Attack]):
 	attack_queue = queue
 
 

@@ -233,7 +233,7 @@ modulate = Color(0.544974, 0.544974, 0.544974, 1)
 texture_filter = 1
 position = Vector2(0, -22)
 sprite_frames = ExtResource("5_7iica")
-frame_progress = 0.443122
+frame_progress = 0.4048
 script = ExtResource("6_tvs7t")
 
 [node name="PointLight2D" type="PointLight2D" parent="Decor/AnimatedSprite2D"]
@@ -249,19 +249,19 @@ texture = SubResource("GradientTexture2D_wefaa")
 texture_scale = 1.5
 
 [node name="Flicker" parent="Decor/AnimatedSprite2D" instance=ExtResource("8_becil")]
-energy = 12.774
+energy = 13.7653
 noise = SubResource("NoiseTexture2D_3skjv")
 min_energy = 10.0
 
 [node name="Flicker2" parent="Decor/AnimatedSprite2D" instance=ExtResource("8_becil")]
 position = Vector2(-47, 35)
-energy = 12.774
+energy = 13.7653
 noise = SubResource("NoiseTexture2D_3skjv")
 min_energy = 10.0
 
 [node name="Flicker3" parent="Decor/AnimatedSprite2D" instance=ExtResource("8_becil")]
 position = Vector2(68, 30)
-energy = 9.16104
+energy = 10.6479
 texture_scale = 0.83
 noise = SubResource("NoiseTexture2D_3skjv")
 min_energy = 5.0

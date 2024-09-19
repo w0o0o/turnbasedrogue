@@ -34,6 +34,7 @@ var default_turn = {
 	"args": []
 }
 var turn = default_turn
+var special_ability_cool_down_max: int = 0
 var special_ability_cool_down: int = 0
 
 enum EntityState {
@@ -66,7 +67,7 @@ func play_sound(sound: AudioStream):
 	sound_player.play()
 	
 
-var attack_queue = []
+var attack_queue: Array[Attack] = []
 
 func handle_move_into_enemy(cells: Array[Entity], _direction: int, _enemy: Entity) -> Array[Entity]:
 	# default implementation for entities is to return the cells array unchanged

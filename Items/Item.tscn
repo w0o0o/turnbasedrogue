@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://df4cek4ww1k1f"]
+
+[ext_resource type="Script" path="res://Items/item.gd" id="1_3xhhe"]
+[ext_resource type="Texture2D" uid="uid://dv2vjr2yxcw0k" path="res://Items/glyphs-base.png" id="1_e8xb8"]
+[ext_resource type="Resource" uid="uid://c4uuff4steijn" path="res://Items/HealthPotion.tres" id="2_xpjxu"]
+
+[sub_resource type="Gradient" id="Gradient_ko8m6"]
+colors = PackedColorArray(1, 1, 1, 0.647059, 0.62, 0.28148, 0.1364, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wd4xy"]
+gradient = SubResource("Gradient_ko8m6")
+fill = 1
+fill_from = Vector2(0.491453, 0.491453)
+fill_to = Vector2(0.141026, 0.153846)
+
+[node name="Item" type="Node2D"]
+script = ExtResource("1_3xhhe")
+item_data = ExtResource("2_xpjxu")
+
+[node name="ItemIcon" type="Sprite2D" parent="."]
+modulate = Color(0.596233, 0.155436, 0.255165, 1)
+z_index = 100
+position = Vector2(0.5, -10.67)
+texture = ExtResource("1_e8xb8")
+hframes = 32
+vframes = 6
+frame = 7
+
+[node name="PointLight2D" type="PointLight2D" parent="ItemIcon"]
+energy = 2.665
+texture = SubResource("GradientTexture2D_wd4xy")
+offset = Vector2(-0.5, -0.5)
+texture_scale = 0.5

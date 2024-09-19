@@ -10,7 +10,10 @@ func start(level, boss_battle = false) -> void:
 	State.setup(level, boss_battle)
 	Messenger.death.connect(on_death)
 	Messenger.reset.connect(on_reset)
+	Messenger.drop_item.connect(_on_item_drop)
 
+func _on_item_drop(item: Item):
+	add_child(item)
 
 func on_death():
 	for child in get_children():

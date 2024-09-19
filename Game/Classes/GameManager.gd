@@ -3,6 +3,8 @@ class_name GameManager
 
 var difficulty = 0
 
+var drop_scene = preload("res://Items/Item.tscn")
+
 # Enemies
 var skelly = preload("res://Monsters/Skeleton.tscn")
 var ramses = preload("res://Monsters/Ramsey/Ramsey.tscn")
@@ -10,6 +12,10 @@ var bat = preload("res://Monsters/Bat/Bat.tscn")
 
 # Bosses
 var reaper = preload("res://Monsters/BossReaper/Reaper.tscn")
+
+var health: ItemData = preload("res://Items/HealthPotion.tres")
+
+var items: Array[ItemData] = [health]
 
 var enemy_opts = [ramses]
 var bosses = [reaper]
@@ -19,11 +25,6 @@ var numCells = 5
 var boss_battle: bool = false
 var player: Player = null
 var enemies: Array[Entity] = []
-
-var turns = 0:
-	set(v):
-		turns = v
-		handle_moves_updated(turns)
 
 var level: Node2D = null
 
@@ -35,10 +36,6 @@ var dead = false
 var cell_insts = []
 
 var running_turns = false: set = emit_running_turns
-func emit_running_turns(v: bool):
-	running_turns = v
-	Messenger.running_turns.emit(v)
-
 var cell_parent: Node2D = null
 
 var cell_parent_origin = null
@@ -56,6 +53,17 @@ var test_attack = null
 var attack_library = {}
 var picked_attacks = []
 var discard_pile = []
+var available_library = []
+var disable_printing = false
+
+var turns = 0:
+	set(v):
+		turns = v
+		handle_moves_updated(turns)
+
+func emit_running_turns(v: bool):
+	running_turns = v
+	Messenger.running_turns.emit(v)
 
 func on_attack_upgraded(attack: Attack):
 	print("Upgrading attack: " + attack.name)
@@ -83,8 +91,6 @@ func add_to_discard_pile(attack: Attack):
 	discard_pile.append(attack.name)
 	pass
 
-var available_library = []
-
 func fill_attack_list():
 	for attack in attack_library.keys():
 		available_library.append(attack)
@@ -100,6 +106,7 @@ func reset_discard_pile():
 	discard_pile.clear()
 	new_pile.shuffle()
 	return new_pile
+
 func choose_random_attacks(amount: int) -> Array:
 	load_all_attacks("res://Attacks/")
 	var attacks = []
@@ -117,7 +124,6 @@ func choose_random_attacks(amount: int) -> Array:
 		attacks.append(this_attack)
 	return attacks
 			
-
 func cell_to_position(cell: int) -> Vector2:
 	return Vector2(cell * (cell_size + gap), 0) + cell_parent.position + level.global_position
 
@@ -137,7 +143,6 @@ func place_cells(cell_scene, cp) -> void:
 		cell_insts.append(cell)
 	cell_parent.position.x = -((float(cell_size + gap) * (numCells - 1)) / 2.0)
 
-
 func cleanup():
 	fill_attack_list()
 	turns = 0
@@ -152,6 +157,12 @@ func _init() -> void:
 	load_all_attacks("res://Attacks/")
 	Messenger.death.connect(on_death)
 
+func debug_derandomize():
+	enemy_options = [ramses]
+	enemies_target = 1
+	max_enemies = 1
+	numCells = 5
+
 func randomize_level():
 	if boss_battle:
 		enemy_options = [bosses.pick_random()]
@@ -163,7 +174,8 @@ func randomize_level():
 		numCells = randi_range(5, 5 + difficulty)
 		print("Num cells: " + str(numCells))
 		max_enemies = randi_range(3, 4 + difficulty)
-
+	
+	# debug_derandomize()
 
 func setup(p, l, cell_scene, cells_parent):
 	cleanup()
@@ -200,19 +212,17 @@ func play():
 	Messenger.disable_inventory.emit(false)
 	Messenger.level_started.emit()
 
-
 func run_next_turn():
 	if dead or running_turns:
 		return
 	running_turns = true
+	print("--______________________--")
 
 	var turns_prioritised = [] # array where index is the priority of the turn and the value is an enemy
 	for enemy in enemies:
 		if enemy.health <= 0:
 			continue
-		var prediction = enemy.predict_turn(self)
-		enemy.prediction_priority = prediction
-		# prediction is a number representing the priority of the move (lower is first, higher is last)
+		var prediction = enemy.prediction_priority
 		for i in range(turns_prioritised.size()):
 			if prediction < i:
 				turns_prioritised.insert(i, enemy)
@@ -221,22 +231,15 @@ func run_next_turn():
 			turns_prioritised.append(enemy)
 
 	await player.run_turn(self)
+	
 	for enemy in turns_prioritised:
 		if enemy.health <= 0:
-			continue
-		if enemy.prediction_priority == -1:
-			await enemy.run_turn(self)
-	for enemy in turns_prioritised:
-		if enemy.health <= 0:
-			continue
-		if enemy.prediction_priority == -1:
 			continue
 		await enemy.run_turn(self)
 
 	for enemy in enemies:
 		if enemy.health <= 0:
 			continue
-		enemy.predict_turn(self)
 	
 	killed_enemies += killed_enemies_this_move
 	killed_enemies_this_move = 0
@@ -244,10 +247,17 @@ func run_next_turn():
 	var win = win_check()
 	running_turns = false
 	turns += 1
+	for enemy in enemies:
+		if enemy.health <= 0:
+			continue
+		var prediction = enemy.predict_turn(self)
+		print("\n")
+		enemy.prediction_priority = prediction
 	if not win:
 		if enemies.size() == 0:
 			spawn_enemy()
-		print_cells()
+	print_cells()
+	
 func can_move(entity: Entity, direction: int):
 	var new_cell = entity.cell + direction
 	if new_cell < 0 or new_cell >= numCells:
@@ -275,7 +285,8 @@ func move(entity: Entity, direction: int):
 			# no change
 			return false
 		cells = result
-		entity.special_ability_cool_down = 2
+		entity.special_ability_cool_down = entity.special_ability_cool_down_max
+		print("Special ability cooldown: " + str(entity.special_ability_cool_down))
 		for i in range(numCells):
 			if cells[i] == null:
 				continue
@@ -304,15 +315,16 @@ func damage_entity(entity: Entity, damage: int):
 
 func _on_enemy_death(enemy: Entity):
 	print("Enemy died")
+	if randi_range(0, 0) == 0:
+		var item = drop_item(enemy)
+		Messenger.drop_item.emit(item)
 	enemies.erase(enemy)
 	enemies_updated(enemy)
-
 	pass
 
-var disable_printing = true
 func print_cells():
-	if disable_printing:
-		return
+	# if disable_printing:
+	# 	return
 	var cell_str = ""
 	var stat_str = ""
 	var direction_str = ""
@@ -330,9 +342,7 @@ func print_cells():
 			var dir_arrow = ">" if cells[i].facing == 1 else "<"
 			direction_str += dir_arrow
 	print(cell_str)
-	print(stat_str)
 	print(direction_str)
-
 
 func place_enemy(enemy: Entity):
 	var empty_cells = []
@@ -359,7 +369,6 @@ func on_death():
 func enemies_updated(_e):
 	pass
 
-
 func spawn_enemy():
 	var enem = enemy_options.pick_random()
 	var enemy = enem.instantiate()
@@ -371,7 +380,6 @@ func spawn_enemy():
 	place_enemy(enemy)
 	pass
 
-
 func handle_moves_updated(moves):
 	if moves == 0:
 		return
@@ -381,6 +389,13 @@ func handle_moves_updated(moves):
 		return
 	if moves % 3 == 0:
 		spawn_enemy()
+
+func drop_item(entity: Entity) -> Item:
+	var item = drop_scene.instantiate()
+	var chosen_item_data = items.pick_random()
+	item.item_data = chosen_item_data
+	item.global_position = entity.global_position
+	return item
 
 func win_check():
 	if killed_enemies >= enemies_target:
@@ -393,3 +408,15 @@ func win_check():
 		Messenger.disable_inventory.emit(true)
 		return true
 	return false
+
+func has_line_of_sight(a: Entity, b: Entity) -> bool: # check if entity a has a clear path to entity b (must be facing entity b and have no enemies between them)
+	if a.cell == -1 or b.cell == -1:
+		return false
+	if a.cell == b.cell:
+		return true
+	if a.facing != sign(b.cell - a.cell):
+		return false
+	for i in range(a.cell, b.cell, a.facing):
+		if cells[i] != null:
+			return false
+	return true
