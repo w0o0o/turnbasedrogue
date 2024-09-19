@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://ct8kqyw8i2dur"]
+
+[ext_resource type="Texture2D" uid="uid://cb7nx2kfg38py" path="res://Game/Health/health_bg.png" id="1_2g05v"]
+[ext_resource type="Script" path="res://Game/Health/healthbar.gd" id="1_rr7t6"]
+[ext_resource type="Texture2D" uid="uid://dkm31hjs85o4d" path="res://Game/Health/health_bar.png" id="2_bhmho"]
+
+[node name="Healthbar" type="Node2D"]
+script = ExtResource("1_rr7t6")
+
+[node name="bg" type="Sprite2D" parent="."]
+texture = ExtResource("1_2g05v")
+
+[node name="bar" type="Sprite2D" parent="."]
+texture = ExtResource("2_bhmho")

@@ -11,7 +11,7 @@ var attack_icon: Sprite2D = null
 var prediction_priority = 0
 var health_bar = null
 
-@onready var hb_scene = preload("res://UI/Inventory/IconLabels/Health.tscn")
+@onready var hb_scene = preload("res://Game/Health/Healthbar.tscn")
 
 func create_icon(src: String):
 	var icon = Sprite2D.new()
@@ -29,13 +29,17 @@ func setup_health():
 		pos = get_node("health_pos").position
 	health_bar.position = pos
 	add_child(health_bar)
-	health_bar.mana_count = health
-	health_bar.show_mana()
+	health_bar.max_amount = health
+	health_bar.amount = health
+	health_bar.show()
 
 func _on_health_change(_v: int):
 	if health_bar != null:
-		health_bar.mana_count = health
-		health_bar.update_count()
+		if health <= 0:
+			health_bar.amount = 0
+			health_bar.hide()
+		else:
+			health_bar.amount = health
 
 
 @export var attacks: Array[Attack] = []
@@ -47,6 +51,7 @@ func _ready():
 	add_child(aggro_icon)
 	add_child(attack_icon)
 	setup_health()
+	Messenger.death.connect(health_bar.hide)
 
 
 func predict_turn(game: GameManager) -> int:

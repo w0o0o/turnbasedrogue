@@ -1,0 +1,16 @@
+[remap]
+
+importer="aseprite_wizard.plugin.static-texture"
+type="AtlasTexture"
+uid="uid://nru88qjyyeb2"
+path="res://.godot/imported/numberBubble.aseprite-86112faa24954d21a619479e557d178d.res"
+
+[deps]
+
+source_file="res://UI/Inventory/Assets/numberBubble.aseprite"
+dest_files=["res://.godot/imported/numberBubble.aseprite-86112faa24954d21a619479e557d178d.res"]
+
+[params]
+
+exclude_layers_pattern=""
+only_visible_layers=false

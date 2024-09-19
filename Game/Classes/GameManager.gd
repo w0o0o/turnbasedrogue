@@ -11,9 +11,9 @@ var bat = preload("res://Monsters/Bat/Bat.tscn")
 # Bosses
 var reaper = preload("res://Monsters/BossReaper/Reaper.tscn")
 
-var enemy_opts = [skelly, ramses, bat]
+var enemy_opts = [ramses]
 var bosses = [reaper]
-var enemy_options = [skelly, ramses, bat]
+var enemy_options = [ramses]
 var cells: Array[Entity] = []
 var numCells = 5
 var boss_battle: bool = false

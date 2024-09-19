@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://by4ongno34pfq"]
+[gd_scene load_steps=7 format=3 uid="uid://by4ongno34pfq"]
 
 [ext_resource type="Script" path="res://UI/Inventory/inventory.gd" id="1_orain"]
 [ext_resource type="PackedScene" uid="uid://cs57ndiljnd40" path="res://UI/Inventory/Card.tscn" id="2_p4g7o"]
 [ext_resource type="Texture2D" uid="uid://btdwx7g2ix3we" path="res://UI/Assets/Inputs/TILE_0553.PNG" id="3_mys7q"]
+[ext_resource type="FontFile" uid="uid://spn4ve4oisi6" path="res://Fonts/TripleN.ttf" id="4_accpd"]
 [ext_resource type="Texture2D" uid="uid://b2sex6cdisdce" path="res://UI/Assets/Inputs/TILE_0554.PNG" id="4_hy0u4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4abti"]
+font = ExtResource("4_accpd")
+font_size = 12
 
 [node name="Inventory" type="Node2D"]
 script = ExtResource("1_orain")
@@ -12,6 +17,14 @@ card_base = ExtResource("2_p4g7o")
 [node name="LeftPrompt" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.539)
 texture = ExtResource("3_mys7q")
+
+[node name="Label" type="Label" parent="LeftPrompt"]
+offset_left = -32.0
+offset_top = -2.0
+offset_right = 8.0
+offset_bottom = 21.0
+text = "0/3"
+label_settings = SubResource("LabelSettings_4abti")
 
 [node name="RightPrompt" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.539)

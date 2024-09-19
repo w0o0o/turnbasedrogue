@@ -18,14 +18,12 @@ frame = 11
 frame_progress = 1.0
 
 [node name="Dark" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0)
 texture_filter = 1
 position = Vector2(0, 3)
 texture = ExtResource("3_pl42o")
 
 [node name="Light" type="Sprite2D" parent="."]
 visible = false
-modulate = Color(1, 1, 1, 0)
 texture_filter = 1
 position = Vector2(0, 3)
 texture = ExtResource("4_fuley")

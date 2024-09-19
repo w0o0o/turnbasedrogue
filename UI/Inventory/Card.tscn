@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cs57ndiljnd40"]
+[gd_scene load_steps=12 format=3 uid="uid://cs57ndiljnd40"]
 
 [ext_resource type="Script" path="res://UI/Inventory/card.gd" id="1_3obcm"]
 [ext_resource type="Texture2D" uid="uid://be54y04enc1y5" path="res://UI/Inventory/Assets/cardbase.aseprite" id="1_v34h4"]
@@ -12,141 +12,11 @@ size = Vector2(16, 21)
 
 [sub_resource type="LabelSettings" id="LabelSettings_b0old"]
 font = ExtResource("3_qtix5")
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="Animation" id="Animation_kr5i5"]
+[sub_resource type="Animation" id="Animation_imhge"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Cardbase:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.5, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Cardbase/Label:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-20, -6)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Cardbase/Label:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Cardbase:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Cardbase:texture")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_04oe5")]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Cardbase/WeaponIcon:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_qk5qm"]
-resource_name = "focus_hover"
-length = 0.1667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Cardbase:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0.5, 0), Vector2(0.5, -4)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Cardbase/Label:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.133333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-27.5, -11.5), Vector2(-27.5, -26)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Cardbase/Label:modulate")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_xbf8f"]
-resource_name = "focus_reset"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Cardbase:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(0.5, 0.5),
-"update": 0,
-"values": [Vector2(0, -8), Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_wle1n"]
-resource_name = "show"
-length = 0.27
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -154,7 +24,70 @@ tracks/0/path = NodePath("Cardbase:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.133333, 0.266667),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cardbase:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_04oe5")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cardbase/WeaponIcon:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Cardbase/Label:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Cardbase/Label:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="Animation" id="Animation_3ejft"]
+resource_name = "show_card"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cardbase:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.233333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1e-05, 1), Vector2(1, 1)]
@@ -166,10 +99,10 @@ tracks/1/path = NodePath("Cardbase:texture")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.133333, 0.266667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.132333, 0.133333),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ExtResource("2_04oe5"), ExtResource("2_04oe5"), ExtResource("1_v34h4"), ExtResource("1_v34h4")]
+"values": [ExtResource("2_04oe5"), ExtResource("2_04oe5"), ExtResource("1_v34h4")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -178,25 +111,47 @@ tracks/2/path = NodePath("Cardbase/WeaponIcon:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.133333),
+"times": PackedFloat32Array(0, 0.132333, 0.133333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, false, true]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Cardbase/Label:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.133233, 0.133333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Cardbase/Label:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l1bl5"]
 _data = {
-"RESET": SubResource("Animation_kr5i5"),
-"focus_hover": SubResource("Animation_qk5qm"),
-"focus_reset": SubResource("Animation_xbf8f"),
-"show": SubResource("Animation_wle1n")
+"RESET": SubResource("Animation_imhge"),
+"show_card": SubResource("Animation_3ejft")
 }
 
 [node name="Card" type="Node2D"]
 script = ExtResource("1_3obcm")
 
 [node name="Cardbase" type="Sprite2D" parent="."]
-position = Vector2(0.5, 0)
+position = Vector2(0, -8)
 texture = ExtResource("2_04oe5")
 
 [node name="Area2D" type="Area2D" parent="Cardbase"]
@@ -207,35 +162,33 @@ collision_mask = 0
 position = Vector2(-0.5, -0.5)
 shape = SubResource("RectangleShape2D_ewehv")
 
-[node name="Label" type="Label" parent="Cardbase"]
-modulate = Color(1, 1, 1, 0)
-show_behind_parent = true
-custom_minimum_size = Vector2(50, 0)
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -29.5
-offset_top = -29.0
-offset_right = 25.5
-offset_bottom = -13.0
-grow_horizontal = 2
-grow_vertical = 0
-pivot_offset = Vector2(27, 14.5)
-text = "Redraw"
-label_settings = SubResource("LabelSettings_b0old")
-horizontal_alignment = 1
-
 [node name="Tooltip" parent="Cardbase" instance=ExtResource("5_l1vop")]
 position = Vector2(0, -11)
 
 [node name="WeaponIcon" type="Sprite2D" parent="Cardbase"]
 visible = false
-position = Vector2(-0.5, 0)
+position = Vector2(-0.5, -1)
 texture = ExtResource("6_rymyj")
 hframes = 9
 frame = 1
+
+[node name="Label" type="Label" parent="Cardbase"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -13.5
+offset_top = -20.0
+offset_right = -5.5
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(4, 5)
+text = "4"
+label_settings = SubResource("LabelSettings_b0old")
+horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -244,6 +197,4 @@ libraries = {
 speed_scale = 0.7
 
 [connection signal="input_event" from="Cardbase/Area2D" to="." method="_on_area_2d_input_event"]
-[connection signal="mouse_entered" from="Cardbase/Area2D" to="." method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Cardbase/Area2D" to="." method="_on_area_2d_mouse_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

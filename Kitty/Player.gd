@@ -52,6 +52,7 @@ func run_turn(game: GameManager):
 		game.turn_around(self)
 	elif turn["type"] == "ATTACK":
 		for attack in attack_queue:
+			Messenger.attack_executed.emit(attack)
 			await execute_attack(attack)
 		Messenger.attacks_executed.emit(attack_queue)
 		attack_queue.clear()
@@ -163,9 +164,6 @@ func _on_attack_selected(attack):
 func _on_queue_reordered(queue):
 	attack_queue = queue
 
-func add_attack_to_library(attack: Attack):
-	Messenger.attack_added_to_library.emit(attack)
-	pass
 
 func _on_skip_turn():
 	if allowed_input != null and allowed_input != "skip":
