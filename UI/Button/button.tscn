@@ -12,8 +12,10 @@ content_margin_bottom = 1.0
 
 [node name="Button" type="Button"]
 texture_filter = 1
+offset_right = 126.0
+offset_bottom = 34.0
 theme_override_fonts/font = ExtResource("1_efimw")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 theme_override_styles/focus = SubResource("StyleBoxEmpty_l5385")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_l5385")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_l5385")

@@ -47,15 +47,18 @@ func start(level, boss_battle = false):
 
 
 func _on_shop_button_pressed() -> void:
+	close_shop()
 	$Items.get_child(0).buy()
 	pass # Replace with function body.
 
 
 func _on_shop_button_2_pressed() -> void:
+	close_shop()
 	$Items.get_child(1).buy()
 	pass # Replace with function body.
 
 
 func _on_shop_button_3_pressed() -> void:
+	close_shop()
 	$Items.get_child(2).buy()
 	pass # Replace with function body.

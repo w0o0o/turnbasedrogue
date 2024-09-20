@@ -1,10 +1,10 @@
 extends Node2D
 class_name Entity
 
-@onready var foot_step_sound: AudioStream = preload("res://sfx/footstep.mp3")
-@onready var punch_1: AudioStream = preload("res://sfx/punch1.mp3")
+@onready var foot_step_sound: AudioStream = preload("res://sfx/8bit/scratch_sound.wav")
+@onready var punch_1: AudioStream = preload("res://sfx/8bit/punch.wav")
 @onready var punch_2: AudioStream = preload("res://sfx/punch2.mp3")
-@onready var scratch: AudioStream = preload("res://sfx/scratch_sound.mp3")
+@onready var scratch: AudioStream = preload("res://sfx/8bit/scratch_sound.wav")
 var punch_sound: AudioStreamRandomizer = null
 var sound_player: AudioStreamPlayer2D = null
 var also_turn: Array = []
@@ -59,7 +59,6 @@ func _ready() -> void:
 	add_child(sound_player)
 	punch_sound = AudioStreamRandomizer.new()
 	punch_sound.add_stream(0, punch_1)
-	punch_sound.add_stream(1, punch_2)
 	hide()
 
 func play_sound(sound: AudioStream):
@@ -136,10 +135,9 @@ func _on_damage(_damage: int):
 func handle_change_direction(_before: int, after: int):
 	var tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(self, "scale:x", after, 0.2)
-	tween.parallel()
 	for item in also_turn:
-		tween.tween_property(item, "scale:x", after, 0.2)
 		tween.parallel()
+		tween.tween_property(item, "scale:x", after, 0.2)
 	await get_tree().create_timer(0.2).timeout
 
 
@@ -285,3 +283,8 @@ func get_animation_duration(sprite: AnimatedSprite2D, animation: String):
 	var fps = sprite.sprite_frames.get_animation_speed(animation)
 	var duration = float(frame_count) / float(fps)
 	return duration
+
+func pick_up_item(item: Item):
+	item.queue_free()
+	await item.execute(self)
+	

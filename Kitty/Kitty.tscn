@@ -6,6 +6,7 @@
 [ext_resource type="SpriteFrames" uid="uid://dvsr73pjp2cbe" path="res://Kitty/Cats/Meow_Knight.aseprite" id="2_kqkm0"]
 
 [node name="Kitty" type="Node2D"]
+visible = false
 script = ExtResource("1_37moo")
 cat_frames = ExtResource("2_cub43")
 selected_cat = 1

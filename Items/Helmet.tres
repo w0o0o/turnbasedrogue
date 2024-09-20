@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://bbftsgos1a5td"]
+
+[ext_resource type="Script" path="res://Items/ItemData.gd" id="1_3yiis"]
+
+[resource]
+script = ExtResource("1_3yiis")
+name = "Helmet"
+description = "Its a fucking helmet you nonce"
+icon_frame = 30
+tint = Color(0, 0.443137, 1, 1)
+type = "ITEM"

@@ -21,6 +21,7 @@ var enemy_opts = [ramses]
 var bosses = [reaper]
 var enemy_options = [ramses]
 var cells: Array[Entity] = []
+var dropped_items: Array[Array] = []
 var numCells = 5
 var boss_battle: bool = false
 var player: Player = null
@@ -140,6 +141,7 @@ func place_cells(cell_scene, cp) -> void:
 		var cell = cell_scene.instantiate()
 		cell.position = Vector2(i * (cell_size + gap), 0)
 		cell_parent.add_child(cell)
+		cell.cell_num = i
 		cell_insts.append(cell)
 	cell_parent.position.x = -((float(cell_size + gap) * (numCells - 1)) / 2.0)
 
@@ -188,8 +190,10 @@ func setup(p, l, cell_scene, cells_parent):
 	entities.hide()
 	level.add_child(entities)
 	place_cells(cell_scene, cells_parent)
+	dropped_items.clear()
 	for i in range(numCells):
 		cells.append(null)
+		dropped_items.append([])
 	
 	player.cell = -1
 	player.gm = self
@@ -291,6 +295,11 @@ func move(entity: Entity, direction: int):
 			if cells[i] == null:
 				continue
 			cells[i].cell = i # update the cell index of each entity (entities will perform the animation themselves on this value change)
+		# check if there are any drops on the cell
+		for item in dropped_items[new_cell]:
+			if item is Item:
+				entity.pick_up_item(item)
+				dropped_items[new_cell].erase(item)
 		return true
 
 	# player turns to an empty cell (no enemy)
@@ -298,6 +307,12 @@ func move(entity: Entity, direction: int):
 	cells[new_cell] = entity
 	entity.cell = new_cell
 	entity.play_sound(entity.foot_step_sound)
+	
+	# check if there are any drops on the cell
+	for item in dropped_items[new_cell]:
+		if item is Item:
+			entity.pick_up_item(item)
+			dropped_items[new_cell].erase(item)
 	return true
 
 func damage_entity(entity: Entity, damage: int):
@@ -391,10 +406,12 @@ func handle_moves_updated(moves):
 		spawn_enemy()
 
 func drop_item(entity: Entity) -> Item:
+	var cell = entity.cell
 	var item = drop_scene.instantiate()
 	var chosen_item_data = items.pick_random()
 	item.item_data = chosen_item_data
 	item.global_position = entity.global_position
+	dropped_items[cell].append(item)
 	return item
 
 func win_check():

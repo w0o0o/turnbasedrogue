@@ -197,4 +197,5 @@ libraries = {
 speed_scale = 0.7
 
 [connection signal="input_event" from="Cardbase/Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="mouse_exited" from="Cardbase/Area2D" to="." method="_on_area_2d_mouse_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

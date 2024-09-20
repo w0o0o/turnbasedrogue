@@ -114,7 +114,9 @@ func _on_area_2d_input_event(viewport, event, shape_idx) -> void:
 			print("Pressed")
 			if cooldown == 0:
 				emit_signal("pressed", self)
-
+		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+			$Cardbase/Tooltip.show_tooltip()
+			tool_tip_shown = true
 
 func _set_focused(v):
 	var changed = focused != v
@@ -130,3 +132,17 @@ func _set_focused(v):
 
 func _set_focused_ui(focused):
 	pass
+
+func _on_area_2d_mouse_exited() -> void:
+	if tool_tip_shown:
+		$Cardbase/Tooltip.hide_tooltip()
+		tool_tip_shown = false
+	
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("show_tool_tip"):
+		if focused:
+			$Cardbase/Tooltip.show_tooltip()
+			tool_tip_shown = true
+		elif tool_tip_shown:
+			$Cardbase/Tooltip.hide_tooltip()
+			tool_tip_shown = false

@@ -7,7 +7,7 @@ var cell_scene = null
 var cells = null
 var gm: GameManager = null
 var selected_cat = 1
-var default_health = 100
+var default_health = 9
 var health = 9
 var killed_enemies = 0
 var mana = 5: set = _on_mana_change

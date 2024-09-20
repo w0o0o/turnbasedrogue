@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvt2pqucd2mqx"]
+[gd_scene load_steps=14 format=3 uid="uid://dvt2pqucd2mqx"]
 
 [ext_resource type="Script" path="res://Game/Cells/cell_in_game.gd" id="1_5l001"]
 [ext_resource type="SpriteFrames" uid="uid://dh3qonr5lkvug" path="res://Effects/Explosion03.aseprite" id="2_egl51"]
 [ext_resource type="Texture2D" uid="uid://b35whvs5jidh5" path="res://Game/Cells/cellSprite_Dark.png" id="3_pl42o"]
 [ext_resource type="Texture2D" uid="uid://cjesyxo83yhhu" path="res://Game/Cells/cellSprite_Light.png" id="4_fuley"]
+[ext_resource type="Texture2D" uid="uid://dv2vjr2yxcw0k" path="res://Items/glyphs-base.png" id="5_3truw"]
 
 [sub_resource type="Gradient" id="Gradient_6ehgi"]
 interpolation_mode = 2
@@ -15,6 +16,39 @@ width = 16
 fill = 1
 fill_from = Vector2(0.5, 1)
 fill_to = Vector2(0.5, 0)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5mun3"]
+particles_animation = true
+particles_anim_h_frames = 32
+particles_anim_v_frames = 6
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_q00f5"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_b621c"]
+gradient = SubResource("Gradient_q00f5")
+
+[sub_resource type="Curve" id="Curve_f7an4"]
+_data = [Vector2(0, 0.496058), 0.0, 0.0, 0, 0, Vector2(1, 0), -5.50895, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ars73"]
+curve = SubResource("Curve_f7an4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gfuo7"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(8, 0, 1)
+gravity = Vector3(0, -130, 0)
+damping_min = 20.0
+damping_max = 20.0
+scale_min = 0.3
+scale_max = 0.8
+scale_curve = SubResource("CurveTexture_ars73")
+color_ramp = SubResource("GradientTexture1D_b621c")
+anim_offset_min = 0.0365
+anim_offset_max = 0.0365
 
 [node name="CellInGame" type="Node2D"]
 z_index = 10
@@ -43,5 +77,14 @@ texture = ExtResource("4_fuley")
 visible = false
 color = Color(0.490196, 1, 0.137255, 1)
 texture = SubResource("GradientTexture2D_jctua")
+
+[node name="Pickup" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_5mun3")
+emitting = false
+amount = 25
+process_material = SubResource("ParticleProcessMaterial_gfuo7")
+texture = ExtResource("5_3truw")
+lifetime = 0.5
+one_shot = true
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
