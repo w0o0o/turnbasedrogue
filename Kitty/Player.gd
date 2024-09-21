@@ -150,10 +150,14 @@ func _on_animation_finished():
 	
 
 func _on_attack(attack):
+	speed_scale = 1.3
+	$AnimatedSprite2D.speed_scale = speed_scale
 	print("Attack received ", attack)
 	gm.add_to_discard_pile(attack)
 	var anim_name = attack["animation"]
 	await wait_for_animation($AnimatedSprite2D, anim_name)
+	speed_scale = 1.0
+	$AnimatedSprite2D.speed_scale = speed_scale
 	return 1.0
 
 func _on_attack_selected(attack):

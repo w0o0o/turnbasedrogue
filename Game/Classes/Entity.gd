@@ -8,6 +8,7 @@ class_name Entity
 var punch_sound: AudioStreamRandomizer = null
 var sound_player: AudioStreamPlayer2D = null
 var also_turn: Array = []
+var speed_scale: float = 1.0
 
 var gm: GameManager = null:
 	set(g):
@@ -282,7 +283,7 @@ func get_animation_duration(sprite: AnimatedSprite2D, animation: String):
 	var frame_count = sprite.sprite_frames.get_frame_count(animation) + 1
 	var fps = sprite.sprite_frames.get_animation_speed(animation)
 	var duration = float(frame_count) / float(fps)
-	return duration
+	return duration / speed_scale
 
 func pick_up_item(item: Item):
 	item.queue_free()

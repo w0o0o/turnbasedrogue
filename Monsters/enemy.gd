@@ -32,7 +32,9 @@ func setup_health():
 	var pos = Vector2(0, -30)
 	if has_node("health_pos"):
 		pos = get_node("health_pos").position
+	pos = Vector2(0, 1)
 	health_bar.position = pos
+	health_bar.z_index = 100000000
 	add_child(health_bar)
 	health_bar.max_amount = health
 	health_bar.amount = health

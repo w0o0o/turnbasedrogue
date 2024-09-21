@@ -18,6 +18,6 @@ class_name Attack
 @export var ramming: bool = false # attack moves towards the next enemy in the direction of the attack
 
 func upgrade():
-    damage += 1
-    Messenger.attack_upgraded.emit(self)
-    State.gm.on_attack_upgraded(self)
+	damage += 1
+	Messenger.attack_upgraded.emit(self)
+	State.gm.on_attack_upgraded(self)

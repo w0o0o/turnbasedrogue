@@ -11,6 +11,7 @@ animation = "Attack_Both_1"
 damage_cells = Array[int]([-1, 1])
 damage = 2
 mana_cost = 2
+cooldown = 3
 projectile = false
 piercing = 0
 reverse = false

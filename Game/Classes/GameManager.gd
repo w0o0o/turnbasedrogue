@@ -13,6 +13,7 @@ var bat = preload("res://Monsters/Bat/Bat.tscn")
 var frog = preload("res://Monsters/Frog/Frog.tscn")
 var pumpkin = preload("res://Monsters/Pumpkin/Pumpkin.tscn")
 var mage = preload("res://Monsters/Mage/Mage.tscn")
+var slime = preload("res://Monsters/Slime/Slime.tscn")
 
 # Bosses
 var reaper = preload("res://Monsters/BossReaper/Reaper.tscn")
@@ -21,9 +22,9 @@ var health: ItemData = preload("res://Items/HealthPotion.tres")
 
 var items: Array[ItemData] = [health]
 
-var enemy_opts = [skelly, ramses, bat, frog, pumpkin, mage]
+var enemy_opts = [skelly, ramses, bat, frog, pumpkin, mage, slime]
 var bosses = [reaper, werewolf]
-var enemy_options = [skelly, ramses, bat, frog, pumpkin, mage]
+var enemy_options = [skelly, ramses, bat, frog, pumpkin, mage, slime]
 var cells: Array[Entity] = []
 var dropped_items: Array[Array] = []
 var numCells = 5
@@ -49,7 +50,7 @@ var entities: Node2D = null
 
 var killed_enemies = 0
 var killed_enemies_this_move = 0
-var hit_enemies_this_move = 0
+var hit_enemies_this_move = 0: set = _handle_combo
 
 var max_enemies = 3
 var enemies_target = 2 # number of enemies to kill to win
@@ -65,6 +66,11 @@ var turns = 0:
 	set(v):
 		turns = v
 		handle_moves_updated(turns)
+
+func _handle_combo(v: int):
+	var combo = v > 1
+	hit_enemies_this_move = v
+	Messenger.combo.emit(combo)
 
 func emit_running_turns(v: bool):
 	running_turns = v
@@ -164,7 +170,7 @@ func _init() -> void:
 	Messenger.death.connect(on_death)
 
 func debug_derandomize():
-	enemy_options = [werewolf]
+	enemy_options = [slime]
 	enemies_target = 1
 	max_enemies = 1
 	numCells = 5
@@ -225,7 +231,6 @@ func run_next_turn():
 		return
 	running_turns = true
 	print("--______________________--")
-
 	var turns_prioritised = [] # array where index is the priority of the turn and the value is an enemy
 	for enemy in enemies:
 		if enemy.health <= 0:
@@ -239,11 +244,13 @@ func run_next_turn():
 			turns_prioritised.append(enemy)
 
 	await player.run_turn(self)
+	await timeout(0.2)
 	
 	for enemy in turns_prioritised:
 		if enemy.health <= 0:
 			continue
 		await enemy.run_turn(self)
+		await timeout(0.2)
 
 	for enemy in enemies:
 		if enemy.health <= 0:
