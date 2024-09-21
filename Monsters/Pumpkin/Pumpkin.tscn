@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://bntew0gwllbjr"]
+
+[ext_resource type="Script" path="res://Monsters/Pumpkin/Pumpkin.gd" id="1_w24go"]
+[ext_resource type="SpriteFrames" uid="uid://dmhxy3umqp6c7" path="res://Monsters/Pumpkin/PumpkinHead.aseprite" id="2_fdt3u"]
+[ext_resource type="Script" path="res://Attacks/attack.gd" id="2_lj55k"]
+[ext_resource type="Resource" uid="uid://d20tyaoc3jg5y" path="res://Attacks/kick.tres" id="3_spcxb"]
+
+[node name="Pumpkin" type="Node2D"]
+script = ExtResource("1_w24go")
+attacks = Array[ExtResource("2_lj55k")]([ExtResource("3_spcxb")])
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = ExtResource("2_fdt3u")
+animation = &"Spell 2"
+offset = Vector2(0, -10)
+
+[node name="health_pos" type="Marker2D" parent="."]
+position = Vector2(0, -30)
+
+[connection signal="animation_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_changed"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

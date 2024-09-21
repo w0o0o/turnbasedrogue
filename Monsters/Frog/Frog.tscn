@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bu20rymp81kwx"]
+
+[ext_resource type="Script" path="res://Monsters/Frog/Frog.gd" id="1_l3n8v"]
+[ext_resource type="Script" path="res://Attacks/attack.gd" id="2_nucn1"]
+[ext_resource type="SpriteFrames" uid="uid://c1qlmsjop5kig" path="res://Monsters/Frog/ToxicFrog.aseprite" id="2_s400k"]
+[ext_resource type="Resource" uid="uid://4d4dst6gpom" path="res://Attacks/stab.tres" id="3_eq4fv"]
+
+[node name="Frog" type="Node2D"]
+script = ExtResource("1_l3n8v")
+attacks = Array[ExtResource("2_nucn1")]([ExtResource("3_eq4fv")])
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = ExtResource("2_s400k")
+animation = &"Attack"
+frame = 5
+frame_progress = 1.0
+offset = Vector2(2, -9)
+
+[node name="health_pos" type="Marker2D" parent="."]
+position = Vector2(0, -30)
+
+[connection signal="animation_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_changed"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

@@ -1,13 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnbs7m5h8ger"]
+[gd_scene load_steps=3 format=3 uid="uid://dnbs7m5h8ger"]
 
 [ext_resource type="Script" path="res://Monsters/Ramsey/ramsey.gd" id="1_o8xbw"]
 [ext_resource type="SpriteFrames" uid="uid://dk2d8aqiayj8" path="res://Monsters/Ramsey/ramsey.aseprite" id="2_ae1yy"]
-[ext_resource type="Script" path="res://Attacks/attack.gd" id="2_bxgbr"]
-[ext_resource type="Resource" uid="uid://djbv42jk1t2i8" path="res://Attacks/ram.tres" id="4_bypjt"]
 
 [node name="Ramsey" type="Node2D"]
 script = ExtResource("1_o8xbw")
-attacks = Array[ExtResource("2_bxgbr")]([ExtResource("4_bypjt")])
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

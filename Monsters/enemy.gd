@@ -2,23 +2,19 @@ extends Entity
 class_name Enemy
 
 
-		# turn = {
-		# 	"type": "ATTACK"
-		# }
+enum EnemyTraits {
+	NORETREAT, # enemy will not retreat 
+	INSTANTATTACK, # enemy will aggro if it can hit the player when it queues an attack
+	AGGRESSIVE, # instead of retreating, the enemy will move towards the player
+	DOUBLEMOVE, # enemy will move twice as fast (2 cells per turn if possible else 1 cell)
+}
 var spawned = true
 var aggro_icon: Sprite2D = null
 var attack_icon = null
 var prediction_priority = 0
 var health_bar = null
-
-enum EnemyTraits {
-	NORETREAT, # enemy will not retreat 
-	INSTANTATTACK, # enemy will aggro if it can hit the player when it queues an attack
-	AGGRESSIVE, # instead of retreating, the enemy will move towards the player
-
-}
-
-var traits = [] 
+@export var attacks: Array[Attack] = []
+@export var traits:Array[EnemyTraits] = [] 
 
 @onready var hb_scene = preload("res://Game/Health/Healthbar.tscn")
 @onready var att_icon_scene = preload("res://Attacks/attack_icon/AttackIcon.tscn")
@@ -53,7 +49,6 @@ func _on_health_change(_v: int):
 			health_bar.amount = health
 
 
-@export var attacks: Array[Attack] = []
 
 func _ready():
 	super._ready()
@@ -130,11 +125,20 @@ func predict_turn(game: GameManager) -> int:
 		if has_line_of_sight:
 			print("Enemy has line of sight to player, will move towards player")
 			# we only move towards the player if we have line of sight to them
+			var move_direction = direction_to_player
+			if traits.has(EnemyTraits.DOUBLEMOVE):
+				# double move
+				var can = game.can_move(self, move_direction * 2)
+				if can:
+					move_direction *= 2
+					print("Enemy has double move, will move twice as fast")
 			turn = {
 				"type": "MOVE",
-				"args": [direction_to_player]
+				"args": [move_direction]
 			}
 			return -1
+		else:
+			print("Enemy has no line of sight to player, will move randomly")
 		
 	# enemy cant do anything, skip turn
 	print("Enemy can't do anything, skipping turn")

@@ -8,7 +8,11 @@ var drop_scene = preload("res://Items/Item.tscn")
 # Enemies
 var skelly = preload("res://Monsters/Skeleton.tscn")
 var ramses = preload("res://Monsters/Ramsey/Ramsey.tscn")
+var werewolf = preload("res://Monsters/Werewolf/Werewolf.tscn")
 var bat = preload("res://Monsters/Bat/Bat.tscn")
+var frog = preload("res://Monsters/Frog/Frog.tscn")
+var pumpkin = preload("res://Monsters/Pumpkin/Pumpkin.tscn")
+var mage = preload("res://Monsters/Mage/Mage.tscn")
 
 # Bosses
 var reaper = preload("res://Monsters/BossReaper/Reaper.tscn")
@@ -17,9 +21,9 @@ var health: ItemData = preload("res://Items/HealthPotion.tres")
 
 var items: Array[ItemData] = [health]
 
-var enemy_opts = [ramses]
-var bosses = [reaper]
-var enemy_options = [ramses]
+var enemy_opts = [skelly, ramses, bat, frog, pumpkin, mage]
+var bosses = [reaper, werewolf]
+var enemy_options = [skelly, ramses, bat, frog, pumpkin, mage]
 var cells: Array[Entity] = []
 var dropped_items: Array[Array] = []
 var numCells = 5
@@ -160,7 +164,7 @@ func _init() -> void:
 	Messenger.death.connect(on_death)
 
 func debug_derandomize():
-	enemy_options = [ramses]
+	enemy_options = [werewolf]
 	enemies_target = 1
 	max_enemies = 1
 	numCells = 5
@@ -428,12 +432,16 @@ func win_check():
 
 func has_line_of_sight(a: Entity, b: Entity) -> bool: # check if entity a has a clear path to entity b (must be facing entity b and have no enemies between them)
 	if a.cell == -1 or b.cell == -1:
+		print("One of the entities is not on the board")
 		return false
 	if a.cell == b.cell:
+		print("Entities are on the same cell")
 		return true
 	if a.facing != sign(b.cell - a.cell):
+		print("Entities are not facing each other")
 		return false
-	for i in range(a.cell, b.cell, a.facing):
+	for i in range(a.cell + a.facing, b.cell):
 		if cells[i] != null:
+			print("There is an enemy between the entities: %s" % cells[i])
 			return false
 	return true

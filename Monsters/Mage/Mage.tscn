@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://bjw2m4mh2h8wf"]
+
+[ext_resource type="Script" path="res://Monsters/Mage/Mage.gd" id="1_etld1"]
+[ext_resource type="Script" path="res://Attacks/attack.gd" id="2_om7u4"]
+[ext_resource type="SpriteFrames" uid="uid://dacmotawvuocl" path="res://Monsters/Mage/Mage.aseprite" id="2_r7h1f"]
+[ext_resource type="Resource" uid="uid://bos33mteliaeo" path="res://Attacks/arrow.tres" id="3_p7dsl"]
+[ext_resource type="Resource" uid="uid://4d4dst6gpom" path="res://Attacks/stab.tres" id="4_fq7d3"]
+
+[node name="Mage" type="Node2D"]
+script = ExtResource("1_etld1")
+attacks = Array[ExtResource("2_om7u4")]([ExtResource("3_p7dsl"), ExtResource("4_fq7d3")])
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = ExtResource("2_r7h1f")
+animation = &"Attack"
+frame = 5
+frame_progress = 1.0
+offset = Vector2(0, -10)
+
+[node name="health_pos" type="Marker2D" parent="."]
+position = Vector2(0, -30)
+
+[connection signal="animation_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_changed"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bk30vtt3x31he"]
+
+[ext_resource type="Script" path="res://Monsters/Werewolf/Werewolf.gd" id="1_mrxtv"]
+[ext_resource type="SpriteFrames" uid="uid://swrdpltev3vd" path="res://Monsters/Werewolf/Werewolf.aseprite" id="2_cg17k"]
+
+[node name="Werewolf" type="Node2D"]
+script = ExtResource("1_mrxtv")
+traits = Array[int]([3])
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = ExtResource("2_cg17k")
+animation = &"Idle"
+frame_progress = 0.411166
+offset = Vector2(0, -11)
+
+[node name="health_pos" type="Marker2D" parent="."]
+position = Vector2(0, -30)
+
+[connection signal="animation_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_changed"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
